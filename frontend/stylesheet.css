@@ -1,0 +1,49 @@
+.header {
+    display: flex;
+    padding: 30px;
+    background: aquamarine;
+}
+
+.ourLogo {
+    flex-grow: 1;
+}
+
+.filler {
+    flex-grow: 0.63;
+}
+
+.inputContainer {
+    display: flex;
+}
+
+.queueTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    padding: 16px;
+    flex-grow: 1;
+}
+
+td, th {
+    border: 2px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.storageQuantity {
+    flex-grow: 1;
+}
+
+.empty {
+    flex-grow: 1;
+}
+
+.barley {
+    transform: rotate(-0.25turn);
+}
+
+
+
