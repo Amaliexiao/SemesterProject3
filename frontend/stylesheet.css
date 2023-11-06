@@ -1,3 +1,8 @@
+/*
+HEADER FROM THIS POINT
+The Display at the very top of the website
+ */
+
 .header {
     display: flex;
     padding: 30px;
@@ -12,38 +17,174 @@
     flex-grow: 0.63;
 }
 
+/*
+QUEUE TABLE FROM THIS POINT
+The logic behind the queue.
+ */
+
 .inputContainer {
     display: flex;
+
 }
 
 .queueTable {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     padding: 16px;
-    flex-grow: 1;
+    margin-right: 20px;
+
 }
 
-td, th {
-    border: 2px solid black;
+.progressAlignment {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.arrowUp {
+    margin: 3px;
+    font-size: 26px;
+    color: dodgerblue;
+}
+
+.arrowDown {
+    margin: 3px;
+    font-size: 26px;
+    color: dodgerblue;
+}
+
+.close {
+    margin: 3px;
+    font-size: 24px;
+    color: red;
+}
+
+.batchProgress {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.beerQueueTable td, .beerQueueTable th {
+    border: 1px solid black;
     text-align: left;
     padding: 8px;
 }
 
-tr:nth-child(even) {
+
+.beerQueueTable tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+/*
+STORAGE FROM THIS POINT
+This part keeps track of the quantity of Barley, Hops, Wheat, etc.
+ */
+
 .storageQuantity {
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 440px;
+    height: 190px;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
     flex-grow: 1;
+
+}
+
+.storageAlt {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 250px;
+
+}
+
+.storageLabels {
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.label {
+    flex-grow: 1;
+    margin-top: -5px;
+    font-family: Arial, sans-serif;
+}
+
+.barContainer {
+    background-color: lightgrey;
+    position: relative;
+    transform: translateY(-110%);
+    top: 102%;
+    margin-left: 30px;
+    width: 50px;
+    height: 180px;
+    float: left;
+    border: 1px solid black;
+}
+
+.bar {
+    background-color: forestgreen;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    box-sizing: border-box;
+    animation: grow 1.5s ease-out forwards;
+    transform-origin: bottom;
+}
+
+.maintenanceLabel{
+    font-family: Arial, sans-serif;
+    margin-top: 30px;
+    margin-left: 25px;
+
+}
+
+.maintenanceContainer {
+    background-color: lightgrey;
+    position: relative;
+    transform: translateY(-665%);
+    top: 102%;
+    margin-left: 25px;
+    width: 385px;
+    height: 50px;
+    float: left;
+    border: 1px solid black;
+}
+
+.maintenanceBar {
+    background-color: darkred;
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    height: 100%;
+    box-sizing: border-box;
+    animation: slide 1.5s ease-out forwards;
+    transform-origin: left;
+}
+@keyframes slide {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+
+@keyframes grow {
+    from {
+        transform: scaleY(0);
+    }
 }
 
 .empty {
     flex-grow: 1;
 }
 
-.barley {
-    transform: rotate(-0.25turn);
-}
+
 
 
 

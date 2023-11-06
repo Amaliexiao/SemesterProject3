@@ -1,64 +1,209 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Beer Machine</title>
-    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="stylesheet.css"/>
     <script src="frontend.js"></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="ourLogo">
+</head>
+<body>
+<div class="header">
+    <div class="ourLogo">
         <h1>B&R</h1>
-      </div>
-      <div class="filler">
+    </div>
+    <div class="filler">
         <p>Beer Brewer</p>
-      </div>
-      <div class="sduLogo">
+    </div>
+    <div class="sduLogo">
         <img src="resources/SDU_Logo.png" width="350" height="100">
-      </div>
     </div>
-    <div class="body">
-    </div>
-    <div class="inputContainer">
-      <div class="queueTable">
-        <table>
-          <tr>
-            <th>Queue</th>
-            <th>Nr.</th>
-          </tr>
-          <tr>
-            <td>ashkjfl</td>
-            <td>sdfg</td>
-          </tr>
-          <tr>
-            <td>asfdg</td>
-            <td>sgdshf</td>
-          </tr>
+</div>
+<div class="body">
+</div>
+<div class="inputContainer">
+    <div class="queueTable">
+        <table class="beerQueueTable">
+            <tr>
+                <th>Queue</th>
+                <th>Nr.</th>
+            </tr>
+            <tr>
+                <td class="progressAlignment">
+                    <div id="queue1">
+                        IPA:04
+                    </div>
+                    <div class="batchProgress">
+                        <progress id="beerProgress1" value="32" max="100">
+                            32%
+                        </progress>
+                    </div>
+                        <div class="arrowUp">
+                            <ion-icon name="arrow-round-up"></ion-icon>
+                        </div>
+                        <div class="arrowDown">
+                            <ion-icon name="arrow-round-down"></ion-icon>
+                        </div>
+                        <div class="close">
+                            <ion-icon name="close-circle"></ion-icon>
+                        </div>
+                </td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td class="progressAlignment">
+                    <div id="queue2">
+                        ALE:04
+                    </div>
+                    <div class="batchProgress">
+                        <progress id="beerProgress2" value="0" max="100">
+                            0%
+                        </progress>
+                    </div>
+                    <div class="arrowUp">
+                        <ion-icon name="arrow-round-up"></ion-icon>
+                    </div>
+                    <div class="arrowDown">
+                        <ion-icon name="arrow-round-down"></ion-icon>
+                    </div>
+                    <div class="close">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                </td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td class="progressAlignment">
+                    <div id="queue3">
+                        PIL:29
+                    </div>
+                    <div class="batchProgress">
+                        <progress id="beerProgress3" value="0" max="100">
+                            0%
+                        </progress>
+                    </div>
+                    <div class="arrowUp">
+                        <ion-icon name="arrow-round-up"></ion-icon>
+                    </div>
+                    <div class="arrowDown">
+                        <ion-icon name="arrow-round-down"></ion-icon>
+                    </div>
+                    <div class="close">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                </td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td class="progressAlignment">
+                    <div id="queue4">
+                        STO:09
+                    </div>
+                    <div class="batchProgress">
+                        <progress id="beerProgress4" value="0" max="100">
+                            0%
+                        </progress>
+                    </div>
+                    <div class="arrowUp">
+                        <ion-icon name="arrow-round-up"></ion-icon>
+                    </div>
+                    <div class="arrowDown">
+                        <ion-icon name="arrow-round-down"></ion-icon>
+                    </div>
+                    <div class="close">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                </td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td class="progressAlignment">
+                    <div id="queue5">
+                        IPA:05
+                    </div>
+                    <div class="batchProgress">
+                        <progress id="beerProgress5" value="0" max="100">
+                            0%
+                        </progress>
+                    </div>
+                    <div class="arrowUp">
+                        <ion-icon name="arrow-round-up"></ion-icon>
+                    </div>
+                    <div class="arrowDown">
+                        <ion-icon name="arrow-round-down"></ion-icon>
+                    </div>
+                    <div class="close">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </div>
+                </td>
+                <td>5</td>
+            </tr>
         </table>
-      </div>
-      <div class="storageQuantity">
-        <div class="barley">
-          <label for="amountBarley">Barley</label>
-          <progress id="amountBarley" max="100" value="70">70%</progress>
-        </div>
-        <div class="hops">
-          <label for="amountHops">Hops</label>
-          <progress id="amountHops" max="100" value="70">70%</progress>
-        </div>
-        <div class="malt">
-          <label for="amountMalt">Malt</label>
-          <progress id="amountMalt" max="100" value="70">70%</progress>
-        </div>
-        <div class="wheat">
-          <label for="amountWheat">Wheat</label>
-          <progress id="amountWheat" max="100" value="70">70%</progress>
-        </div>
-        <div class="yeast">
-          <label for="amountYeast">Yeast</label>
-          <progress id="amountYeast" max="100" value="70">70%</progress>
-        </div>
-      </div>
-      <div class="empty">hvjk</div>
     </div>
-  </body>
+
+
+    <div class="storageAlt">
+        <div class="storageQuantity">
+            <div class="barContainer">
+                <div class="bar" id="barley" style="height:70%">
+                </div>
+            </div>
+            <div class="barContainer">
+                <div class="bar" id="hops" style="height:90%">
+                </div>
+            </div>
+            <div class="barContainer">
+                <div class="bar" id="malt" style="height:20%">
+                </div>
+            </div>
+            <div class="barContainer">
+                <div class="bar" id="wheat" style="height:50%">
+                </div>
+            </div>
+            <div class="barContainer">
+                <div class="bar" id="yeast" style="height:80%">
+                </div>
+            </div>
+        </div>
+        <div class="storageLabels">
+            <div class="label">
+                <b>
+                    Barley
+                </b>
+            </div>
+            <div class="label">
+                <b>
+                    Hops
+                </b>
+            </div>
+            <div class="label">
+                <b>
+                    Malt
+                </b>
+            </div>
+            <div class="label">
+                <b>
+                    Wheat
+                </b>
+            </div>
+            <div class="label">
+                <b>
+                    Yeast
+                </b>
+            </div>
+        </div>
+        <div class="maintenanceLabel">
+            <b>
+                Maintenance:
+            </b>
+        </div>
+        <div class="maintenanceContainer">
+            <div class="maintenanceBar">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="empty">hvjk</div>
+</div>
+<script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+</body>
 </html>
