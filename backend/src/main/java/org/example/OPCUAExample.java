@@ -12,6 +12,8 @@ import org.eclipse.milo.opcua.stack.core.types.structured.EndpointDescription;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 @SpringBootApplication
 public class OPCUAExample {
     public static void main(String[] args) {
@@ -19,9 +21,12 @@ public class OPCUAExample {
         //SpringApplication.run(Main.class, args);
 
         SensorController sensorController = new SensorController(OpcUaConfig.getOpcUaConfig());
+        StateController stateController = new StateController();
         try{
-
-            sensorController.getSensorValue();
+            Variant cntrlValue = new Variant(2);
+            Variant requestValue = new Variant(true);
+            stateController.ChangeCntrlValue(cntrlValue);
+            stateController.ChangeCntrlRequest(requestValue);
 
         }
         catch(Exception e){

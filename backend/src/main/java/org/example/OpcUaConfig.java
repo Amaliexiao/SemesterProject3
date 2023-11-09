@@ -2,6 +2,7 @@ package org.example;
 
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.config.OpcUaClientConfig;
+import org.eclipse.milo.opcua.sdk.client.api.identity.UsernameProvider;
 import org.eclipse.milo.opcua.stack.client.DiscoveryClient;
 import org.eclipse.milo.opcua.stack.core.UaException;
 import org.eclipse.milo.opcua.stack.core.security.SecurityPolicy;
@@ -34,7 +35,7 @@ public class OpcUaConfig {
 // Create a session
             client = OpcUaClient.create(
                     OpcUaClientConfig.builder()
-                            .setEndpoint(endpoint)
+                            .setEndpoint(endpoint).setIdentityProvider(new UsernameProvider("sdu","1234"))
                             .build()
             );
             client.connect().get();
