@@ -5,17 +5,24 @@ The Display at the very top of the website
 
 .header {
     display: flex;
-    padding: 30px;
+    padding: 20px;
     background: aquamarine;
 }
 
 .ourLogo {
     flex-grow: 1;
+    font-size: xx-large;
 }
 
 .filler {
     flex-grow: 0.63;
+    margin-top: 45px;
 }
+
+.sduLogo {
+    margin-top: 20px;
+}
+
 
 /*
 QUEUE TABLE FROM THIS POINT
@@ -24,6 +31,7 @@ The logic behind the queue.
 
 .inputContainer {
     display: flex;
+    height: 24em;
 
 }
 
@@ -32,6 +40,7 @@ The logic behind the queue.
     border-collapse: collapse;
     padding: 16px;
     margin-right: 20px;
+
 
 }
 
@@ -88,18 +97,20 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     align-items: flex-end;
     justify-content: flex-start;
     width: 440px;
-    height: 190px;
+    height: 12em;
     overflow: hidden;
     position: relative;
-    margin: 20px auto;
+    margin: 22px auto;
     flex-grow: 1;
+
 
 }
 
 .storageAlt {
-    display: flex;
+    display: block;
     flex-direction: column;
-    margin-bottom: 250px;
+    margin-top: 2px;
+
 
 }
 
@@ -107,22 +118,25 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     display: flex;
     align-items: center;
     margin-left: 35px;
+
 }
 
 .label {
     flex-grow: 1;
-    margin-top: -5px;
+    margin-top: -15px;
+    margin-bottom: 18px;
     font-family: Arial, sans-serif;
+
 }
 
 .barContainer {
     background-color: lightgrey;
     position: relative;
-    transform: translateY(-110%);
-    top: 102%;
+    transform: translateY(-90%);
+    top: 90%;
     margin-left: 30px;
     width: 50px;
-    height: 180px;
+    height: 190px;
     float: left;
     border: 1px solid black;
 }
@@ -138,17 +152,18 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     transform-origin: bottom;
 }
 
-.maintenanceLabel{
+.maintenanceLabel {
     font-family: Arial, sans-serif;
-    margin-top: 30px;
     margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: -10px;
 
 }
 
 .maintenanceContainer {
     background-color: lightgrey;
     position: relative;
-    transform: translateY(-665%);
+    transform: translateY(-710%);
     top: 102%;
     margin-left: 25px;
     width: 385px;
@@ -167,6 +182,7 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     animation: slide 1.5s ease-out forwards;
     transform-origin: left;
 }
+
 @keyframes slide {
     from {
         transform: scaleX(0);
@@ -180,11 +196,110 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     }
 }
 
-.empty {
+
+/*
+SENSOR VALUES FROM THIS POINT
+ */
+
+.sensorContainer {
     flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    height: 20em;
+    min-height: 50px;
+    background-color: whitesmoke;
+    overflow-y: scroll;
+}
+
+.sensorCapsule {
+
+}
+
+.sensorIcon {
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.sensorContainer ion-icon {
+    background-color: mediumaquamarine;
+    padding: 0.5em;
+    border-radius: 50%;
+    border: 3px solid;
+}
+
+.sensorName {
+    text-align: center;
+}
+
+.sensorValue {
+    text-align: center;
 }
 
 
+/*
+BUTTONS FROM THIS POINT
+ */
+
+.lowerContainer {
+    background-color: dodgerblue;
+    display: flex;
+
+}
+
+.productionButtons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 50em;
+}
+
+.buttonLogic {
+    padding: 2em;
+    width: 10em;
+    margin: 1em;
+    font-size: large;
+}
+
+/*
+BATCH REPORTS FROM THIS POINT
+ */
+
+.batchReports {
+    display: flex;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    padding: 16px;
+    margin-right: 20px;
+    width: 80em;
+    background-color: darkorange;
+}
+
+.reportTable {
+    width: 100%;
+}
 
 
+.reportTable td, .reportTable th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
 
+
+.reportTable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.batchIdHeader {
+    width: 25%;
+}
+
+.dateHeader {
+    width: 25%;
+}
+
+.reportHeader {
+    width: 50%;
+}
