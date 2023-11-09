@@ -213,7 +213,7 @@ SENSOR VALUES FROM THIS POINT
 }
 
 .sensorCapsule {
-
+    align-items: center;
 }
 
 .sensorIcon {
@@ -232,10 +232,14 @@ SENSOR VALUES FROM THIS POINT
 
 .sensorName {
     text-align: center;
+    font-family: arial, sans-serif;
+    padding: 0.5em;
 }
 
 .sensorValue {
     text-align: center;
+    font-family: arial, sans-serif;
+    padding: 0.5em;
 }
 
 
@@ -244,7 +248,6 @@ BUTTONS FROM THIS POINT
  */
 
 .lowerContainer {
-    background-color: dodgerblue;
     display: flex;
 
 }
@@ -252,14 +255,16 @@ BUTTONS FROM THIS POINT
 .productionButtons {
     display: flex;
     flex-wrap: wrap;
-    max-width: 50em;
+    max-width: 55.25em;
 }
 
 .buttonLogic {
     padding: 2em;
-    width: 10em;
+    width: 11em;
     margin: 1em;
     font-size: large;
+    font-family: arial, sans-serif;
+
 }
 
 /*
@@ -270,10 +275,9 @@ BATCH REPORTS FROM THIS POINT
     display: flex;
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    padding: 16px;
-    margin-right: 20px;
     width: 80em;
-    background-color: darkorange;
+    overflow-y: scroll;
+    flex-grow: 1;
 }
 
 .reportTable {
