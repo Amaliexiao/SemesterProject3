@@ -17,12 +17,12 @@ import java.util.concurrent.ExecutionException;
 public class OpcUaConfig {
 
     @Bean
-    public static OpcUaClient opcUaClient() {
+    public OpcUaClient opcUaClient() {
         OpcUaClient opcUaClient = createAndConfigureOpcUaClient();
         return opcUaClient;
     }
 
-    private static OpcUaClient createAndConfigureOpcUaClient() {
+    private OpcUaClient createAndConfigureOpcUaClient() {
 
         //Create and configure te OpcUaClient
         OpcUaClient client = null;
@@ -52,7 +52,7 @@ public class OpcUaConfig {
         return client;
     }
 
-    public static OpcUaClient getOpcUaConfig(){
+    public OpcUaClient getOpcUaConfig(){
         return opcUaClient();
     }
 
