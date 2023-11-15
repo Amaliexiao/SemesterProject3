@@ -1,6 +1,5 @@
 package org.example;
 
-import org.apache.log4j.BasicConfigurator;
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.config.OpcUaClientConfig;
 import org.eclipse.milo.opcua.stack.client.DiscoveryClient;
@@ -17,16 +16,16 @@ import java.util.concurrent.CompletableFuture;
 @SpringBootApplication
 public class OPCUAExample {
     public static void main(String[] args) {
-        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
         //SpringApplication.run(Main.class, args);
 
-        SensorController sensorController = new SensorController(OpcUaConfig.getOpcUaConfig());
-        StateController stateController = new StateController();
+//        SensorController sensorController = new SensorController(OpcUaConfig.getOpcUaConfig());
+//        StateController stateController = new StateController();
         try{
             Variant cntrlValue = new Variant(2);
             Variant requestValue = new Variant(true);
-            stateController.ChangeCntrlValue(cntrlValue);
-            stateController.ChangeCntrlRequest(requestValue);
+//            stateController.ChangeCntrlValue(cntrlValue);
+//            stateController.ChangeCntrlRequest(requestValue);
 
         }
         catch(Exception e){
