@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class SpringServer {
 
     public static void main(String[] args) {
-        OpcUaConfig opcUaConfig = new OpcUaConfig();
         SpringApplication.run(SpringServer.class, args);
     }
 

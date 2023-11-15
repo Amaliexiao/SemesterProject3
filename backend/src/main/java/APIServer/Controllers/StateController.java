@@ -4,10 +4,7 @@ import org.example.OpcUaConfig;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -18,6 +15,7 @@ public class StateController {
     ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
+    @CrossOrigin
     @GetMapping("/newState")
     public void changeCntrlValue(@RequestParam(name = "newValue") int newValue) throws Exception {
         NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.CntrlCmd");
@@ -26,6 +24,7 @@ public class StateController {
         opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
     }
 
+    @CrossOrigin
     @GetMapping("/newState2")
     public void changeCntrlRequest(@RequestParam(name = "newValue") int newValue) throws Exception {
         NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.CmdChangeRequest");
