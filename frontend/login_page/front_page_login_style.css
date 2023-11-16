@@ -41,7 +41,7 @@ body {
 
 .inner-box {
     width: calc(50% - 40px);
-    min-height: 1000px;
+    min-height: 900px;
     background-color: #7FFFD4;
     border: 5px solid transparent;
     border-radius: 15px;
@@ -111,7 +111,6 @@ body {
     width: calc(100% / 2 - 20px);
     padding: 20px;
     background-color: #F8F8F8;
-    border: none;
     border-radius: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -171,8 +170,31 @@ input {
     box-sizing: border-box;
 }
 
-#formContainer {
+#formLoginContainer, #formSignupContainer {
     width: 100%;
+}
+
+.loginSubmit, .signupSubmit {
+    margin-top: 40px;
+    width: calc(100% / 3);
+    padding: 10px;
+    background-color: #F8F8F8;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #F8F8F8;
+    font-family: Roboto, Montserrat;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loginSubmit:hover, .signupSubmit:hover {
+    background-color: #5D9FFF;
+    color: #F8F8F8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #5D9FFF;
 }
 
 /* add animation for the login form*/

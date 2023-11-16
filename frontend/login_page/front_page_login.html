@@ -19,8 +19,9 @@
         </div>
 
         <div class="content-box">
-            <div id="formContainer"></div>
+            <div id="formLoginContainer"></div>
             <button type="button" onclick="toggleLoginForm('login')" class="login-button">Login</button>
+            <div id="formSignupContainer"></div>
             <button type="button" onclick="toggleSignupForm('signup')" class="signup-button">Signup</button>
 
 
@@ -31,17 +32,21 @@
                 <label for="loginPassword">Password</label>
                 <input type="password" id="loginPassword" name="password">
 
-                <button type="button" onclick="submitForm('login')">Submit</button>
+                <button type="button" onclick="submitForm('login')" class="loginSubmit">Login</button>
             </form>
 
             <form class="signup-form" id="signupForm">
+
+                <label for="signupUsername">Username</label>
+                <input type="email" id="signupUsername" name="email">
+
                 <label for="signupEmail">Email</label>
                 <input type="email" id="signupEmail" name="email">
 
                 <label for="signupPassword">Password</label>
                 <input type="password" id="signupPassword" name="password">
 
-                <button type="button" onclick="submitForm('login')">Submit</button>
+                <button type="button" onclick="submitForm('signup')" class="signupSubmit">Signup</button>
             </form>
 
         </div>
