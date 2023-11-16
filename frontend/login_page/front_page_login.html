@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="front_page_login_style.css">
+    <title>Your Webpage Title</title>
+</head>
+<body>
+<header class="header">
+    <div class="logo">B&R</div>
+</header>
+
+<div class="main-container">
+    <div class="inner-box">
+
+        <div class="heading-container">
+            <h2 class="heading-container-text">B&R Authentication</h2>
+        </div>
+
+        <div class="content-box">
+            <div id="formContainer"></div>
+            <button type="button" onclick="toggleLoginForm('login')" class="login-button">Login</button>
+            <button type="button" onclick="toggleSignupForm('signup')" class="signup-button">Signup</button>
+
+
+            <form class="login-form" id="loginForm">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="email">
+
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="password">
+
+                <button type="button" onclick="submitForm('login')">Submit</button>
+            </form>
+
+            <form class="signup-form" id="signupForm">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="email">
+
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="password">
+
+                <button type="button" onclick="submitForm('login')">Submit</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="front_page_login_script.js"></script>
+</body>
+</html>

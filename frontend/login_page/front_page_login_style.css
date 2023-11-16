@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: aquamarine;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo {
+    color: black;
+    font-weight: bold;
+    font-size: 48px;
+    margin-left: 30px;
+    font-family: Roboto, Montserrat;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    border: 2px solid black;
+    padding: 15px 30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.main-container {
+    background-color: #F8F8F8;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-box {
+    width: calc(50% - 40px);
+    min-height: 1000px;
+    background-color: #7FFFD4;
+    border: 5px solid transparent;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px 0;
+    box-sizing: border-box;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inner-box:hover {
+    border-color: #5D9FFF;
+}
+
+.inner-box::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 5px solid;
+    border-image: linear-gradient(to right, #5D9FFF, #7FFFD4);
+    border-image-slice: 1;
+    border-radius: 15px;
+    z-index: -1;
+}
+
+.inner-box:hover::before {
+    border-color: transparent;
+}
+
+.heading-container {
+    margin-top: 40px;
+    text-align: center;
+    justify-content: center;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.heading-container-text {
+    border: 2px solid aquamarine;
+    background: #5D9FFF;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #F8F8F8;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-family: Roboto, Montserrat;
+    letter-spacing: 2px;
+}
+
+.content-box {
+    background-color: #7FFFD4;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-button, .signup-button {
+    margin-top: 40px;
+    width: calc(100% / 2 - 20px);
+    padding: 20px;
+    background-color: #F8F8F8;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #F8F8F8;
+    font-family: Roboto, Montserrat;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-button {
+    margin-top: 50px;
+}
+
+.login-button:hover, .signup-button:hover {
+    background-color: #5D9FFF;
+    color: #F8F8F8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #5D9FFF;
+}
+
+.login-form, .signup-form {
+    display: none;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    animation: fadeIn 0.8s ease-out forwards; /* Use animation for a staggered appearance */
+}
+
+.login-form.active, .signup-form.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    border: 1px solid aquamarine;
+    background: #5D9FFF;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #F8F8F8;
+    font-family: Roboto, Montserrat;
+    letter-spacing: 2px;
+    margin: 10px;
+}
+
+input {
+    width: calc(100% - 100px);
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #F8F8F8;
+    border: 2px solid #F8F8F8;
+    opacity: 0.9;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+#formContainer {
+    width: 100%;
+}
+
+/* add animation for the login form*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* make it fit smaller screen */
+@media screen and (max-width: 768px) {
+    .inner-box {
+        width: 80%;
+    }
+
+    input {
+        width: calc(100% - 10px); /* Adjust width for smaller screens */
+    }
+}
