@@ -1,0 +1,309 @@
+/*
+HEADER FROM THIS POINT
+The Display at the very top of the website
+ */
+
+.body {
+    margin: 0px;
+}
+
+
+.header {
+    display: flex;
+    padding: 20px;
+    background: aquamarine;
+}
+
+.ourLogo {
+    flex-grow: 1;
+    font-size: xx-large;
+}
+
+.sduLogo {
+    margin-top: 20px;
+}
+
+
+/*
+QUEUE TABLE FROM THIS POINT
+The logic behind the queue.
+ */
+
+.inputContainer {
+    display: flex;
+    height: 24em;
+
+}
+
+.queueTable {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    padding: 16px;
+    margin-right: 20px;
+
+
+}
+
+.progressAlignment {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.arrowUp {
+    margin: 3px;
+    font-size: 26px;
+    color: dodgerblue;
+}
+
+.arrowDown {
+    margin: 3px;
+    font-size: 26px;
+    color: dodgerblue;
+}
+
+.close {
+    margin: 3px;
+    font-size: 24px;
+    color: red;
+}
+
+.batchProgress {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding: 10px;
+}
+
+.beerQueueTable td, .beerQueueTable th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.beerQueueTable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+/*
+STORAGE FROM THIS POINT
+This part keeps track of the quantity of Barley, Hops, Wheat, etc.
+ */
+
+.storageQuantity {
+    display: flex;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 440px;
+    height: 12em;
+    overflow: hidden;
+    position: relative;
+    margin: 22px auto;
+    flex-grow: 1;
+
+
+}
+
+.storageAlt {
+    display: block;
+    flex-direction: column;
+    margin-top: 2px;
+
+
+}
+
+.storageLabels {
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+
+}
+
+.label {
+    flex-grow: 1;
+    margin-top: -15px;
+    margin-bottom: 18px;
+    font-family: Arial, sans-serif;
+
+}
+
+.barContainer {
+    background-color: lightgrey;
+    position: relative;
+    transform: translateY(-90%);
+    top: 90%;
+    margin-left: 30px;
+    width: 50px;
+    height: 190px;
+    float: left;
+    border: 1px solid black;
+}
+
+.bar {
+    background-color: forestgreen;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    box-sizing: border-box;
+    animation: grow 1.5s ease-out forwards;
+    transform-origin: bottom;
+}
+
+.maintenanceLabel {
+    font-family: Arial, sans-serif;
+    margin-left: 25px;
+    margin-top: 10px;
+    margin-bottom: -10px;
+
+}
+
+.maintenanceContainer {
+    background-color: lightgrey;
+    position: relative;
+    transform: translateY(-710%);
+    top: 102%;
+    margin-left: 25px;
+    width: 385px;
+    height: 50px;
+    float: left;
+    border: 1px solid black;
+}
+
+.maintenanceBar {
+    background-color: darkred;
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    height: 100%;
+    box-sizing: border-box;
+    animation: slide 1.5s ease-out forwards;
+    transform-origin: left;
+}
+
+@keyframes slide {
+    from {
+        transform: scaleX(0);
+    }
+}
+
+
+@keyframes grow {
+    from {
+        transform: scaleY(0);
+    }
+}
+
+
+/*
+SENSOR VALUES FROM THIS POINT
+ */
+
+.sensorContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1em;
+    height: 20em;
+    min-height: 50px;
+    background-color: whitesmoke;
+    overflow-y: scroll;
+}
+
+.sensorCapsule {
+    align-items: center;
+}
+
+.sensorIcon {
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.sensorContainer ion-icon {
+    background-color: mediumaquamarine;
+    padding: 0.5em;
+    border-radius: 50%;
+    border: 3px solid;
+}
+
+.sensorName {
+    text-align: center;
+    font-family: arial, sans-serif;
+    padding: 0.5em;
+}
+
+.sensorValue {
+    text-align: center;
+    font-family: arial, sans-serif;
+    padding: 0.5em;
+}
+
+
+/*
+BUTTONS FROM THIS POINT
+ */
+
+.lowerContainer {
+    display: flex;
+
+}
+
+.productionButtons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 55.25em;
+}
+
+.buttonLogic {
+    padding: 2em;
+    width: 11em;
+    margin: 1em;
+    font-size: large;
+    font-family: arial, sans-serif;
+
+}
+
+/*
+BATCH REPORTS FROM THIS POINT
+ */
+
+.batchReports {
+    display: flex;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 80em;
+    overflow-y: scroll;
+    flex-grow: 1;
+}
+
+.reportTable {
+    width: 100%;
+}
+
+
+.reportTable td, .reportTable th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.reportTable tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.batchIdHeader {
+    width: 25%;
+}
+
+.dateHeader {
+    width: 25%;
+}
+
+.reportHeader {
+    width: 50%;
+}
