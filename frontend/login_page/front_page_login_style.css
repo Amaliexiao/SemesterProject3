@@ -138,7 +138,7 @@ body {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    animation: fadeIn 0.8s ease-out forwards; /* Use animation for a staggered appearance */
+    animation: fadeIn 0.8s ease-out forwards;
 }
 
 .login-form.active, .signup-form.active {
@@ -216,6 +216,6 @@ input {
     }
 
     input {
-        width: calc(100% - 10px); /* Adjust width for smaller screens */
+        width: calc(100% - 10px);
     }
 }
