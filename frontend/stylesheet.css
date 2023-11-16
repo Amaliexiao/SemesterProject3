@@ -3,6 +3,11 @@ HEADER FROM THIS POINT
 The Display at the very top of the website
  */
 
+.body {
+    margin: 0px;
+}
+
+
 .header {
     display: flex;
     padding: 20px;
@@ -12,11 +17,6 @@ The Display at the very top of the website
 .ourLogo {
     flex-grow: 1;
     font-size: xx-large;
-}
-
-.filler {
-    flex-grow: 0.63;
-    margin-top: 45px;
 }
 
 .sduLogo {
