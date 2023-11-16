@@ -11,30 +11,21 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.boot.SpringApplication;
 
 import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/fetch")
-public class HumiditySensor {
+public class MaintenanceSensor {
 
     ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
+
     @CrossOrigin
-    @GetMapping("/humidityValue")
-    public Variant getHumidityValue() {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Status.Parameter[2].Value");
-        Variant sensorValue = null;
-        try {
-            DataValue sensorData = opcUaConfig.getOpcUaConfig().readValue(0, TimestampsToReturn.Both, sensorNodeId).get();
-            sensorValue = sensorData.getValue();
-        }
-        catch (ExecutionException | InterruptedException e) {
-            System.out.println(e);
-        }
-        return sensorValue;
+    @GetMapping("/maintenanceCounter")
+    public Variant getmaintenanceCounter(){
+        Variant maintenanceCounter = opcUaConfig.getNodeValue("ns=6;s=::Program:Maintenance.Counter");
+        return maintenanceCounter;
     }
 }
-
