@@ -14,11 +14,13 @@ import org.eclipse.milo.opcua.stack.core.types.structured.EndpointDescription;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.security.Timestamp;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Configuration
 public class OpcUaConfig {
+    Batch batch;
 
     @Bean
     public OpcUaClient opcUaClient() {
@@ -72,6 +74,28 @@ public class OpcUaConfig {
             System.out.println(e);
         }
         return sensorValue;
+    }
+
+    public void temp() {
+
+        //float batchId = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[0].Value").getValue();
+        int userId;
+        //float beerId = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.Parameter[0].Value").getValue();
+        int size;
+        //float speedId = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.CurMachSpeed").getValue();
+        String state = getNodeValue("ns=6;s=::Program:Cube.Status.StateCurrent").getValue().toString();
+        Float acceptableBeers = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdProcessedCount").getValue();
+        Float defectProducts = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdDefectiveCount").getValue();
+
+
+        Float humidity = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[2].Value").getValue();
+        Float vibration = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
+        Float temperature = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
+        System.out.println(state);
+
+        if (batch == null) {
+            //batch = new Batch(batchId, beerId, speedId, state, temperature, humidity, vibration);
+        }
     }
 
 }
