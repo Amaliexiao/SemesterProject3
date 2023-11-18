@@ -46,3 +46,62 @@ function submitForm(type) {
     const form = document.getElementById(`${type}Form`);
     form.classList.remove('active');
 }
+
+//Auth
+
+async function makeRequest(url, method, data) {
+    try {
+        const response = await fetch(url, {
+            method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Check if the response is JSON
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            const result = await response.json();
+            console.log(result);
+            // Handle the JSON response accordingly (redirect, show messages, etc.)
+        } else {
+            // Handle non-JSON response (plain text, etc.)
+            const result = await response.text();
+            console.log(result);
+            // Handle the non-JSON response accordingly
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+}
+
+// Frontend login logic
+const loginForm = document.getElementById('loginForm');
+loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    await makeRequest('http://localhost:8080/api/auth/login', 'POST', { email, password });
+});
+
+// Frontend signup logic
+const signupForm = document.getElementById('signupForm');
+signupForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const username = document.getElementById('signupUsername').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    await makeRequest('http://localhost:8080/api/auth/signup', 'POST', { username, email, password });
+});
+
+
+

@@ -16,8 +16,9 @@ CREATE TABLE Speeds (
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
+    email varchar(255) UNIQUE NOT NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
-    hashedPassword VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Batches (
@@ -42,7 +43,7 @@ CREATE TABLE Batches (
     highestVib FLOAT NOT NULL
 );
 
-INSERT INTO Users (username, hashedPassword) VALUES ('Test', 'Test1234');
+INSERT INTO Users (email, username, password) VALUES ('test@mail.com','Test', 'Test1234');
 INSERT INTO Beers (name) VALUES ('Pilsner');
 INSERT INTO Speeds (name, speed) VALUES ('Sygt hurtig', 100);
 INSERT INTO Batches (userId, beerId, speedId, size, startTime, stopTime, heldStateDuration, successfulBeers, failedBeers, lowersTemp, meanTemp, highestTemp, lowersHum, meanHum, highestHum, lowersVib, meanVib, highestVib) VALUES (1, 1, 1, 130, '2017-07-23",  "13:10:11', '2017-07-23",  "13:10:11', 3, 100, 30, 3, 3, 3, 2, 2, 2, 1, 1, 1);
