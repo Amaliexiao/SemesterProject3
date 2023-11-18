@@ -3,11 +3,14 @@ function toggleLoginForm() {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const loginButton = document.querySelector('.login-button');
+    const signupButton = document.querySelector('.signup-button');
 
     //display login and hide signup
     loginForm.classList.toggle('active');
     signupForm.classList.remove('active');
 
+    //change display text if other is active
+    signupButton.innerText = 'Signup';
 
     // put form in new div container
     formContainer.innerHTML = '';  // Clear previous content
@@ -22,10 +25,14 @@ function toggleSignupForm() {
     const loginForm = document.getElementById('loginForm');
     const signupForm = document.getElementById('signupForm');
     const signupButton = document.querySelector('.signup-button');
+    const loginButton = document.querySelector('.login-button');
 
     //display login and hide signup
     signupForm.classList.toggle('active');
     loginForm.classList.remove('active');
+
+    //change display text if other is active
+    loginButton.innerText = 'Login';
 
     // put form in new div container
     formContainer.innerHTML = '';
