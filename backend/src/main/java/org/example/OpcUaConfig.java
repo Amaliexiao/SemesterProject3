@@ -77,25 +77,39 @@ public class OpcUaConfig {
     }
 
     public void temp() {
-
-        //float batchId = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[0].Value").getValue();
         int userId;
-        //float beerId = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.Parameter[0].Value").getValue();
-        int size;
-        //float speedId = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.CurMachSpeed").getValue();
-        String state = getNodeValue("ns=6;s=::Program:Cube.Status.StateCurrent").getValue().toString();
-        Float acceptableBeers = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdProcessedCount").getValue();
-        Float defectProducts = (Float) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdDefectiveCount").getValue();
+        int size=10;
+        int state = (int) getNodeValue("ns=6;s=::Program:Cube.Status.StateCurrent").getValue();
+        int acceptableBeers = (int) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdProcessedCount").getValue();
+        int defectProducts = (int) getNodeValue("ns=6;s=::Program:Cube.Admin.ProdDefectiveCount").getValue();
 
 
-        Float humidity = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[2].Value").getValue();
-        Float vibration = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
-        Float temperature = (Float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
-        System.out.println(state);
+        float humidity = (float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[2].Value").getValue();
+        float vibration = (float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
+        float temperature = (float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value").getValue();
 
         if (batch == null) {
-            //batch = new Batch(batchId, beerId, speedId, state, temperature, humidity, vibration);
+            float batchId = (float) getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[0].Value").getValue();
+
+            float beerId = (float) getNodeValue("ns=6;s=::Program:Cube.Admin.Parameter[0].Value").getValue();
+            float speedId = (float) getNodeValue("ns=6;s=::Program:Cube.Status.CurMachSpeed").getValue();
+
+            batch = new Batch(batchId, beerId, speedId, state, temperature, humidity, vibration);
         }
+
+        int i = 0;
+        while (/*acceptableBeers + defectProducts < size*/ i < 15) {
+            batch.addData(state, temperature, humidity, vibration);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            i++;
+        }
+
+        batch.close(acceptableBeers, defectProducts, state, temperature, humidity, vibration);
+
     }
 
 }

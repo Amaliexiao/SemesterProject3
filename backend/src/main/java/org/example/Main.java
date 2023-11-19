@@ -21,10 +21,7 @@ public class Main implements CommandLineRunner {
             ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
             OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
-            while (true) {
-                opcUaConfig.temp();
-                Thread.sleep(1000);
-            }
+            opcUaConfig.temp();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
