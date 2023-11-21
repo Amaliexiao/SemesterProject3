@@ -5,6 +5,8 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const cors = require("cors"); // Import the 'cors' middleware
+const pool = require('./db'); // connect to db
+
 
 const app = express();
 const port = 3000;
@@ -20,18 +22,6 @@ app.use(
   })
 );
 
-const users = [
-  {
-    id: 1,
-    username: "user1@gmail.com",
-    password: "$2b$10$l.i4CzWFj6wS3IiuIZLeDudVWg.bEegPdijwumOCBLZh7ZlRPmNeG",
-  },
-  {
-    id: 2,
-    username: "user2",
-    password: "$2b$10$afVX.Zb0Rc0S1/E.kJ3IBuMl7/q7p3SGHV2pHH2cLCZz7wvL2VYSG",
-  },
-];
 // Parse POST request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -56,28 +46,34 @@ const authenticate = (req, res, next) => {
 };
 
 app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  // Check if the username is valid
-  const user = users.find((u) => u.email === username);
+  try {
+    // Query the database to get the user by email
+    const result = await pool.query('SELECT * FROM beermachine.users WHERE email = $1', [email]);
 
-  if (user) {
-    // Compare the provided password with the hashed password in the database
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (result.rows.length > 0) {
+      // Compare the provided password with the hashed password in the database
+      const passwordMatch = await bcrypt.compare(password, result.rows[0].password);
 
-    if (passwordMatch) {
-      // Store user information in the session
-      req.session.user = user;
-      app.use(express.static(path.join(__dirname, "../frontend")));
-      res.redirect("/overview");
+      if (passwordMatch) {
+        // Store user information in the session
+        req.session.user = result.rows[0];
+        res.redirect("/overview");
+      } else {
+        res.status(401).send("Invalid credentials");
+      }
     } else {
       res.status(401).send("Invalid credentials");
     }
-  } else {
-    res.status(401).send("Invalid credentials");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
+//get the ccs style and js for index file
+app.use(express.static(path.join(__dirname, "../frontend")));
 app.get("/overview", authenticate, (req, res) => {
   const htmlFilePath = path.join(__dirname, "../frontend", "index.html");
   res.sendFile(htmlFilePath);
@@ -94,17 +90,34 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.post("/signup", (req, res) => {
-  const { username, email, password } = req.body;
+//hash passwords before inserting them in db
+const hashPassword = async (password) => {
+  const saltRounds = 10;
+  return bcrypt.hash(password, saltRounds);
+};
+
+app.post("/signup", async (req, res) => {
+  const {username, email, password} = req.body;
 
   if (!username || !email || !password) {
-    return res.status(400).json({ error: "Missing required fields" });
+    return res.status(400).json({error: "Missing required fields"});
   }
 
-  // Your signup logic here
+  try {
+    //wait for password hash
+    const hashedPassword = await hashPassword(password);
 
-  // Instead of sending a plain string, send JSON
-  res.json({ message: "Signup request received" });
+    //query user into database
+    const result = await pool.query('INSERT INTO beermachine.users (email, username, password) VALUES ($1, $2, $3) RETURNING *', [email, username, hashedPassword]);
+
+    req.session.user = result.rows[0];
+
+    res.redirect('/overview');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Internal Server Error'});
+  }
+
 });
 
 // Start the server
