@@ -1,2 +1,4 @@
 backend/.idea/
 backend/target/
+node-server/node_modules/
+database/database/.idea
