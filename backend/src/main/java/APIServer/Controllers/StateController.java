@@ -34,7 +34,7 @@ public class StateController {
     }
 
     @CrossOrigin
-    @GetMapping("/start")
+    @PostMapping("/start")
     public void startRequest() throws Exception{
         changeCntrlValue(2);
         changeCntrlRequest(1);

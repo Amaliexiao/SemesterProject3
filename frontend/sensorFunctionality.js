@@ -1,49 +1,28 @@
 
-//Barley
-
 document.addEventListener("DOMContentLoaded", function() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/barley';
 
-    // Make the API call using fetch
-    fetch(apiEndpoint)
-        .then(response => {
-            // Check if the request was successful (status code 200)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
+    const apiEndpointBarley = 'http://localhost:8080/fetch/barley';
+    const elementIDBarley = 'barley';
+    setIngredientAmount(apiEndpointBarley, elementIDBarley);
 
-            // Parse the JSON in the response
-            return response.json();
-        })
-        .then(data => {
-            // Access and print the values from the JSON response
-            console.log('API Response:', data);
+    const apiEndpointHops = 'http://localhost:8080/fetch/hops';
+    const elementIDHops = 'hops';
+    setIngredientAmount(apiEndpointHops, elementIDHops);
 
-            // Example: Access a specific value from the JSON
-            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+    const apiEndpointMalt = 'http://localhost:8080/fetch/malt';
+    const elementIDMalt = 'malt';
+    setIngredientAmount(apiEndpointMalt, elementIDMalt);
 
+    const apiEndpointWheat = 'http://localhost:8080/fetch/wheat';
+    const elementIDWheat = 'wheat';
+    setIngredientAmount(apiEndpointWheat, elementIDWheat);
 
-            let barleyValue = specificValue/40000*100;
-            // Display the API response on the HTML page
-            document.getElementById('barley').setAttribute("style", "height:"+barleyValue);
-      ;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Display the error on the HTML page
-            document.getElementById('result').innerHTML = `Error: ${error.message}`;
-        });
+    const apiEndpointYeast = 'http://localhost:8080/fetch/yeast';
+    const elementIDYeast = 'yeast';
+    setIngredientAmount(apiEndpointYeast, elementIDYeast);
 });
 
-// Hops
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/hops';
-
-    // Make the API call using fetch
+function setIngredientAmount(apiEndpoint, elementID) {
     fetch(apiEndpoint)
         .then(response => {
             // Check if the request was successful (status code 200)
@@ -63,131 +42,18 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log('Specific Value:', specificValue);
 
 
-            let hopsValue = specificValue/40000*100;
+            let Value = specificValue/40000*100;
             // Display the API response on the HTML page
-            document.getElementById('hops').setAttribute("style", "height:"+hopsValue);
+            document.getElementById(elementID).setAttribute("style", "height:"+Value+'px');
+            console.log(elementID);
             ;
         })
         .catch(error => {
             console.error('Error:', error);
             // Display the error on the HTML page
-            document.getElementById('result').innerHTML = `Error: ${error.message}`;
+            document.getElementById(elementID).innerHTML = `Error: ${error.message}`;
         });
-});
-
-// Malt
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/malt';
-
-    // Make the API call using fetch
-    fetch(apiEndpoint)
-        .then(response => {
-            // Check if the request was successful (status code 200)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Parse the JSON in the response
-            return response.json();
-        })
-        .then(data => {
-            // Access and print the values from the JSON response
-            console.log('API Response:', data);
-
-            // Example: Access a specific value from the JSON
-            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
-
-
-            let maltValue = specificValue/40000*100;
-            // Display the API response on the HTML page
-            document.getElementById('malt').setAttribute("style", "height:"+maltValue);
-            ;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Display the error on the HTML page
-            document.getElementById('result').innerHTML = `Error: ${error.message}`;
-        });
-});
-
-// Wheat
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/wheat';
-
-    // Make the API call using fetch
-    fetch(apiEndpoint)
-        .then(response => {
-            // Check if the request was successful (status code 200)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Parse the JSON in the response
-            return response.json();
-        })
-        .then(data => {
-            // Access and print the values from the JSON response
-            console.log('API Response:', data);
-
-            // Example: Access a specific value from the JSON
-            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
-
-
-            let wheatValue = specificValue/40000*100;
-            // Display the API response on the HTML page
-            document.getElementById('wheat').setAttribute("style", "height:"+wheatValue);
-            ;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Display the error on the HTML page
-            document.getElementById('result').innerHTML = `Error: ${error.message}`;
-        });
-});
-
-// Yeast
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/yeast';
-
-    // Make the API call using fetch
-    fetch(apiEndpoint)
-        .then(response => {
-            // Check if the request was successful (status code 200)
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-
-            // Parse the JSON in the response
-            return response.json();
-        })
-        .then(data => {
-            // Access and print the values from the JSON response
-            console.log('API Response:', data);
-
-            // Example: Access a specific value from the JSON
-            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
-
-
-            let yeastValue = specificValue/40000*100;
-            // Display the API response on the HTML page
-            document.getElementById('yeast').setAttribute("style", "height:"+yeastValue);
-            ;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Display the error on the HTML page
-            document.getElementById('result').innerHTML = `Error: ${error.message}`;
-        });
-});
+};
 
 // Maintenance
 
