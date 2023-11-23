@@ -417,3 +417,121 @@ document.addEventListener("DOMContentLoaded", function() {
 //             document.getElementById('result').innerHTML = `Error: ${error.message}`;
 //         });
 // });
+
+// Current State
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+    const apiEndpoint = 'http://localhost:8080/fetch/currentStateValue';
+
+    // Make the API call using fetch
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            const elementToColor = document.getElementById('stateColor');
+            const stateText = document.getElementById('stateText');
+
+            console.log('Specific Value:', specificValue);
+
+            // Display the API response on the HTML page
+            document.getElementById('stateNumber').textContent=specificValue;
+
+            //Change what state is shown in the UI
+            switch (specificValue) {
+                case 0:
+                    elementToColor.style.backgroundColor = 'red';
+                    stateText.textContent='Deactivated';
+                    break;
+                case 1:
+                    elementToColor.style.backgroundColor = 'blue';
+                    stateText.textContent='Clearing';
+                    break;
+                case 2:
+                    elementToColor.style.backgroundColor = 'red';
+                    stateText.textContent='Stopped';
+                    break;
+                case 3:
+                    elementToColor.style.backgroundColor = 'green';
+                    stateText.textContent='Starting';
+                    break;
+                case 4:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Idle';
+                    break;
+                case 5:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Suspended';
+                    break;
+                case 6:
+                    elementToColor.style.backgroundColor = 'green';
+                    stateText.textContent='Execute';
+                    break;
+                case 7:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Stopping';
+                    break;
+                case 8:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Aborting';
+                    break;
+                case 9:
+                    elementToColor.style.backgroundColor = 'red';
+                    stateText.textContent='Aborted';
+                    break;
+                case 10:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Holding';
+                    break;
+                case 11:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Held';
+                    break;
+                case 15:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Resetting';
+                    break;
+                case 16:
+                    elementToColor.style.backgroundColor = 'green';
+                    stateText.textContent='Completing';
+                    break;
+                case 17:
+                    elementToColor.style.backgroundColor = 'green';
+                    stateText.textContent='Complete';
+                    break;
+                case 18:
+                    elementToColor.style.backgroundColor = 'yellow';
+                    stateText.textContent='Deactivating';
+                    break;
+                case 19:
+                    elementToColor.style.backgroundColor = 'green';
+                    stateText.textContent='Activating';
+                    break;
+                default:
+                    // Default color
+                    elementToColor.style.backgroundColor = 'blue';
+                    stateText.textContent='*Default*';
+            }
+
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+            document.getElementById('stateNumber').innerHTML = `Error: ${error.message}`;
+        });
+
+
+});
+

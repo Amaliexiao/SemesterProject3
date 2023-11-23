@@ -19,6 +19,7 @@ document.getElementById("startButton").onclick =
                     console.error('Error:', error)
                 }
             );
+        
     }
 
 document.getElementById("stopButton").onclick =
@@ -41,6 +42,7 @@ document.getElementById("stopButton").onclick =
                     console.error('Error:', error)
                 }
             );
+
     }
 
 document.getElementById("resetButton").onclick =
@@ -63,6 +65,7 @@ document.getElementById("resetButton").onclick =
                     console.error('Error:', error)
                 }
             );
+
     }
 
 document.getElementById("clearButton").onclick =
