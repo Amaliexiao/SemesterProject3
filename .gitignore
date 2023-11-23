@@ -3,3 +3,5 @@ backend/target/
 node-server/node_modules/
 database/database/.idea
 node-server/node_modules
+node-server/.idea
+.idea/
