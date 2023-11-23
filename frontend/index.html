@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="stylesheet.css"/>
     <script src="sensorFunctionality.js" defer></script>
     <script src="buttonFunctionality.js" defer></script>
+    <script src="batchControl.js" defer></script>
 </head>
 <body class="body">
 <div class="header">
@@ -16,6 +17,19 @@
     </div>
 </div>
 <div class="body">
+</div>
+<div class="popup">
+    <span class="popuptext" id="batchPopup">
+        <h1>Create Batch</h1>
+        <form method="POST">
+        <h3>Choose type of beer</h3>
+        <h3>Choose size for this batch</h3>
+        <h3>Choose speed for production</h3>
+            <input id="speedSlider" type="range" class="slider" min="0" max="100" value="20">
+             <p>Value: <span id="demo"></span> %</p>
+        <input id="submitBatch"type="submit"> </input>
+    </form>
+    </span>
 </div>
 <div class="inputContainer">
     <div class="queueTable">
@@ -210,7 +224,7 @@
                     Temperature
                 </b>
             </div>
-            <div class="sensorValue" >
+            <div class="sensorValue">
                 <b id="temperature">
                     25.0
                 </b>
@@ -336,7 +350,7 @@
 </div>
 <div class="lowerContainer">
     <div class="productionButtons">
-        <button type="button" class="buttonLogic" id="createBatch" onclick="href='#'">
+        <button type="button" class="buttonLogic" id="createBatch" onclick="showBatchPopup()">
             Create Batch
         </button>
         <button type="button" class="buttonLogic" id="startButton">
