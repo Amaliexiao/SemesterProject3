@@ -3,7 +3,8 @@
 <head>
     <title>Beer Machine</title>
     <link rel="stylesheet" href="stylesheet.css"/>
-    <script src="frontend.js" defer></script>
+    <script src="sensorFunctionality.js" defer></script>
+    <script src="buttonFunctionality.js" defer></script>
 </head>
 <body class="body">
 <div class="header">
@@ -193,7 +194,7 @@
             </b>
         </div>
         <div class="maintenanceContainer">
-            <div class="maintenanceBar">
+            <div class="maintenanceBar" id="maintenance">
             </div>
         </div>
     </div>
@@ -209,8 +210,8 @@
                     Temperature
                 </b>
             </div>
-            <div class="sensorValue">
-                <b>
+            <div class="sensorValue" >
+                <b id="temperature">
                     25.0
                 </b>
             </div>
@@ -225,7 +226,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="humidity">
                     49.0
                 </b>
             </div>
@@ -240,7 +241,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="vibration">
                     0.0
                 </b>
             </div>
@@ -255,7 +256,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="batchID">
                     04
                 </b>
             </div>
@@ -270,7 +271,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="prod/min">
                     1.0
                 </b>
             </div>
@@ -285,7 +286,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="acceptableProducts">
                     16
                 </b>
             </div>
@@ -300,7 +301,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="defectProducts">
                     3
                 </b>
             </div>
@@ -328,17 +329,17 @@
                 <b>Total Produced</b>
             </div>
             <div class="sensorValue">
-                <b>19</b>
+                <b id="totalProducts">19</b>
             </div>
         </div>
     </div>
 </div>
 <div class="lowerContainer">
     <div class="productionButtons">
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="createBatch" onclick="href='#'">
             Create Batch
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="startButton">
             Start
         </button>
         <button type="button" class="buttonLogic">
