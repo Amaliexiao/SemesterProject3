@@ -13,5 +13,6 @@ public interface IDatabaseHandler {
             double held_state_duration, int successful_beer, int failed_beer, float lowest_temp, float mean_temp,
             float highest_temp, float lowest_humidity, float mean_humidity, float highest_humidity, float lowest_vib,
             float mean_vib, float highest_vib);
-    public boolean createUser(String name, String password);
+    public boolean createUser(String email,     String name, String password);
+    public boolean addQueuedBatch(int userID, int size, int beerType, int speed);
 }
