@@ -1,5 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
 
     const apiEndpointBarley = 'http://localhost:8080/fetch/barley';
     const elementIDBarley = 'barley';
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const apiEndpointYeast = 'http://localhost:8080/fetch/yeast';
     const elementIDYeast = 'yeast';
     setIngredientAmount(apiEndpointYeast, elementIDYeast);
-});
+}, 1000);
 
 function setIngredientAmount(apiEndpoint, elementID) {
     fetch(apiEndpoint)
@@ -42,7 +42,7 @@ function setIngredientAmount(apiEndpoint, elementID) {
             console.log('Specific Value:', specificValue);
 
 
-            let Value = specificValue/40000*100;
+            let Value = specificValue/35000*100;
             // Display the API response on the HTML page
             document.getElementById(elementID).setAttribute("style", "height:"+Value+'px');
             console.log(elementID);
@@ -57,7 +57,7 @@ function setIngredientAmount(apiEndpoint, elementID) {
 
 // Maintenance
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/maintenanceCounter';
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log('Specific Value:', specificValue);
 
 
-            let maintenanceValue = specificValue/2000*100;
+            let maintenanceValue = specificValue/35000*100;
             // Display the API response on the HTML page
             document.getElementById('maintenance').style.width=maintenanceValue + "%";
             ;
@@ -91,11 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Temperature Sensor
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/temperatureValue';
 
@@ -126,11 +126,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Humidity Sensor
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/humidityValue';
 
@@ -161,11 +161,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Vibration Sensor
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/vibrationValue';
 
@@ -196,11 +196,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Batch ID
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/batchIDValue';
 
@@ -231,11 +231,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Products/min
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/CurMachSpeedValue';
 
@@ -266,11 +266,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Acceptable Products
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/acceptableProductsValue';
 
@@ -301,11 +301,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('acceptableProducts').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Defect Products
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/defectProductsValue';
 
@@ -336,11 +336,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('defectProducts').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
 // Remaining Products - Missing Logic as it may have to find batch size in DB
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/acceptableProductsValue';
 
@@ -374,53 +374,81 @@ document.addEventListener("DOMContentLoaded", function() {
             // Display the error on the HTML page
             document.getElementById('defectProducts').innerHTML = `Error: ${error.message}`;
         });
-});
+}, 1000);
 
-// Total Produced Not done cause has to get two apiEndpoints;
+// Total Produced
+
+setInterval(function(){
+    const apiEndpoint = 'http://localhost:8080/fetch/totalProducts';
+
+    // Function to make API call and return the parsed JSON
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            console.log('Specific Value Total Products:', specificValue);
+            // Display the API response on the HTML page
+            document.getElementById('totalProducts').textContent=specificValue;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+            document.getElementById('totalProducts').innerHTML = `Error: ${error.message}`;
+        });
+    //code goes here that will be run every 5 seconds.
+}, 1000);
+
 
 // document.addEventListener("DOMContentLoaded", function () {
-//     const apiEndpoint1 = 'http://localhost:8080/fetch/defectProductsValue';
-//     const apiEndpoint2 = 'http://localhost:8080/fetch/accptableProductsValue';
+//     const apiEndpoint = 'http://localhost:8080/fetch/totalProducts';
 //
 //     // Function to make API call and return the parsed JSON
-//     const makeApiCall = (apiEndpoint) => {
-//         return fetch(apiEndpoint)
+//         fetch(apiEndpoint)
 //             .then(response => {
+//                 // Check if the request was successful (status code 200)
 //                 if (!response.ok) {
 //                     throw new Error(`HTTP error! Status: ${response.status}`);
 //                 }
+//
+//                 // Parse the JSON in the response
 //                 return response.json();
+//             })
+//             .then(data => {
+//                 // Access and print the values from the JSON response
+//                 console.log('API Response:', data);
+//
+//                 // Example: Access a specific value from the JSON
+//                 const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+//                 console.log('Specific Value Total Products:', specificValue);
+//
+//                 const batchSize = "";
+//                 let remainingProducts = batchSize - specificValue;
+//                 // Display the API response on the HTML page
+//                 document.getElementById('totalProducts').textContent=remainingProducts;
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 // Display the error on the HTML page
+//                 document.getElementById('totalProducts').innerHTML = `Error: ${error.message}`;
 //             });
-//     };
 //
-//     // Make the first API call
-//     makeApiCall(apiEndpoint1)
-//         .then(data1 => {
-//             const value1 = data1.value;
-//             console.log('API Response 1:', data1);
-//
-//             // Make the second API call
-//             return makeApiCall(apiEndpoint2)
-//                 .then(data2 => {
-//                     const value2 = data2.value;
-//                     console.log('API Response 2:', data2);
-//
-//                     // Perform subtraction
-//                     const result = value1 + value2;
-//
-//                     // Display the result on the HTML page
-//                     document.getElementById('totalProducts').textContent=result;
-//                 });
-//         })
-//         .catch(error => {
-//             console.error('Error:', error);
-//             document.getElementById('result').innerHTML = `Error: ${error.message}`;
-//         });
 // });
 
 // Current State
 
-document.addEventListener("DOMContentLoaded", function() {
+setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = 'http://localhost:8080/fetch/currentStateValue';
 
@@ -533,5 +561,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
 
-});
+}, 1000);
 
