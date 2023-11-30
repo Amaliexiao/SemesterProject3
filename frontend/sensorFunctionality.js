@@ -237,7 +237,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = serverUrl + '/fetch/CurMachSpeedValue';
+    const apiEndpoint = serverUrl + '/fetch/MachSpeedValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -272,7 +272,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = serverUrl + '/acceptableProductsValue';
+    const apiEndpoint = serverUrl + '/fetch/acceptableProductsValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
