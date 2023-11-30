@@ -1,23 +1,23 @@
-
+const serverUrl = 'http://localhost:8080'
 setInterval( function() {
 
-    const apiEndpointBarley = 'http://localhost:8080/fetch/barley';
+    const apiEndpointBarley = serverUrl + '/fetch/barley';
     const elementIDBarley = 'barley';
     setIngredientAmount(apiEndpointBarley, elementIDBarley);
 
-    const apiEndpointHops = 'http://localhost:8080/fetch/hops';
+    const apiEndpointHops = serverUrl + '/fetch/hops';
     const elementIDHops = 'hops';
     setIngredientAmount(apiEndpointHops, elementIDHops);
 
-    const apiEndpointMalt = 'http://localhost:8080/fetch/malt';
+    const apiEndpointMalt =  serverUrl + '/fetch/malt';
     const elementIDMalt = 'malt';
     setIngredientAmount(apiEndpointMalt, elementIDMalt);
 
-    const apiEndpointWheat = 'http://localhost:8080/fetch/wheat';
+    const apiEndpointWheat = serverUrl + '/fetch/wheat';
     const elementIDWheat = 'wheat';
     setIngredientAmount(apiEndpointWheat, elementIDWheat);
 
-    const apiEndpointYeast = 'http://localhost:8080/fetch/yeast';
+    const apiEndpointYeast = serverUrl + '/fetch/yeast';
     const elementIDYeast = 'yeast';
     setIngredientAmount(apiEndpointYeast, elementIDYeast);
 }, 1000);
@@ -59,7 +59,7 @@ function setIngredientAmount(apiEndpoint, elementID) {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/maintenanceCounter';
+    const apiEndpoint = serverUrl + '/fetch/maintenanceCounter';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -97,7 +97,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/temperatureValue';
+    const apiEndpoint = serverUrl + '/fetch/temperatureValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -132,7 +132,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/humidityValue';
+    const apiEndpoint = serverUrl + '/fetch/humidityValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -167,7 +167,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/vibrationValue';
+    const apiEndpoint = serverUrl + '/fetch/vibrationValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -202,7 +202,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/batchIDValue';
+    const apiEndpoint = serverUrl + '/fetch/batchIDValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -237,7 +237,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/CurMachSpeedValue';
+    const apiEndpoint = serverUrl + '/fetch/CurMachSpeedValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -272,7 +272,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/acceptableProductsValue';
+    const apiEndpoint = serverUrl = '/acceptableProductsValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -307,7 +307,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/defectProductsValue';
+    const apiEndpoint = serverUrl + '/fetch/defectProductsValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -342,7 +342,7 @@ setInterval( function() {
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/acceptableProductsValue';
+    const apiEndpoint = serverUrl + '/fetch/acceptableProductsValue';
 
 
     // Make the API call using fetch
@@ -379,7 +379,7 @@ setInterval( function() {
 // Total Produced
 
 setInterval(function(){
-    const apiEndpoint = 'http://localhost:8080/fetch/totalProducts';
+    const apiEndpoint = serverUrl + '/fetch/totalProducts';
 
     // Function to make API call and return the parsed JSON
     fetch(apiEndpoint)
@@ -412,7 +412,7 @@ setInterval(function(){
 
 
 // document.addEventListener("DOMContentLoaded", function () {
-//     const apiEndpoint = 'http://localhost:8080/fetch/totalProducts';
+//     const apiEndpoint = serverUrl + '/fetch/totalProducts';
 //
 //     // Function to make API call and return the parsed JSON
 //         fetch(apiEndpoint)
@@ -450,7 +450,7 @@ setInterval(function(){
 
 setInterval( function() {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = 'http://localhost:8080/fetch/currentStateValue';
+    const apiEndpoint = serverUrl + '/fetch/currentStateValue';
 
     // Make the API call using fetch
     fetch(apiEndpoint)

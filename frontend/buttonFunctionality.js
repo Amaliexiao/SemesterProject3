@@ -1,7 +1,8 @@
+const serverUrl = "http://localhost:8080"
 
 document.getElementById("startButton").onclick =
     function () {
-        let url = "http://localhost:8080/control";
+        let url = serverUrl + "/control";
 
         fetch(url + "/start", {
             method: "POST"
@@ -24,7 +25,7 @@ document.getElementById("startButton").onclick =
 
 document.getElementById("stopButton").onclick =
     function () {
-        let url = "http://localhost:8080/control";
+        let url = serverUrl + "/control";
 
         fetch(url + "/stop", {
             method: "POST"
@@ -47,7 +48,7 @@ document.getElementById("stopButton").onclick =
 
 document.getElementById("resetButton").onclick =
     function () {
-        let url = "http://localhost:8080/control";
+        let url = serverUrl + "/control";
 
         fetch(url + "/reset", {
             method: "POST"
@@ -70,7 +71,7 @@ document.getElementById("resetButton").onclick =
 
 document.getElementById("clearButton").onclick =
     function () {
-        let url = "http://localhost:8080/control";
+        let url = serverUrl + "/control";
 
         fetch(url + "/clear", {
             method: "POST"
@@ -92,7 +93,7 @@ document.getElementById("clearButton").onclick =
 
 document.getElementById("abortButton").onclick =
     function () {
-        let url = "http://localhost:8080/control";
+        let url = serverUrl + "/control";
 
         fetch(url + "/abort", {
             method: "POST"
