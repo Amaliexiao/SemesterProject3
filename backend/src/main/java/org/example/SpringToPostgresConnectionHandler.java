@@ -1,21 +1,29 @@
 package org.example;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@SpringBootApplication
-public class SpringToPostgresConnectionHandler implements IDatabaseHandler{
+
+@RestController
+@CrossOrigin
+@RequestMapping("/database")
+public class SpringToPostgresConnectionHandler implements IDatabaseHandler, CommandLineRunner {
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public SpringToPostgresConnectionHandler(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    public SpringToPostgresConnectionHandler(){}
 
     @Override
     public JSONObject getBeer(int id) {
@@ -101,10 +109,23 @@ public class SpringToPostgresConnectionHandler implements IDatabaseHandler{
     }
 
     @Override
-    public boolean createUser(String name, String password) {
-        String sqlStatement = "INSERT INTO users (username,hashedpassword) VALUES ('"+name+"','"+password+"')";
+    public boolean createUser(String email, String name, String password) {
+        String sqlStatement = "INSERT INTO users (email,username,password) VALUES ('"+email+"','"+name+"','"+password+"')";
         jdbcTemplate.update(sqlStatement);
         return true;
     }
 
+    @CrossOrigin
+    @PostMapping("/addBatch")
+    @Override
+    public boolean addQueuedBatch(@RequestParam(name="userID") int userID, @RequestParam(name = "size") int size, @RequestParam(name = "beerType") int beerType, @RequestParam(name = "speed") int speed) {
+        String sqlStatement = "INSERT INTO queuedbatches(userid,size, beertype, speed) VALUES('"+userID+"','"+size+"','"+beerType+"','"+speed+"')";
+        jdbcTemplate.update(sqlStatement);
+        return true;
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+
+    }
 }

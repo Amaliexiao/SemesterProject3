@@ -16,7 +16,7 @@ public class MachSpeedController {
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
     @CrossOrigin
-    @GetMapping("/newMachSpeed")
+    @PostMapping("/newMachSpeed")
     public void changeMachSpeed(@RequestParam(name = "newValue") float newValue) throws Exception {
         NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.MachSpeed");
         Variant v = new Variant(newValue);
