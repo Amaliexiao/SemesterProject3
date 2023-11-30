@@ -1,10 +1,10 @@
-const serverUrl = "http://localhost:8080"
+
 
 document.getElementById("startButton").onclick =
     function () {
-        let url = serverUrl + "/control";
+        let url = serverUrl + '/control';
 
-        fetch(url + "/start", {
+        fetch(url + '/start', {
             method: "POST"
         })
             .then(resp => {
@@ -25,9 +25,9 @@ document.getElementById("startButton").onclick =
 
 document.getElementById("stopButton").onclick =
     function () {
-        let url = serverUrl + "/control";
+        let url = serverUrl + '/control';
 
-        fetch(url + "/stop", {
+        fetch(url + '/stop', {
             method: "POST"
         })
             .then(resp => {
@@ -48,9 +48,9 @@ document.getElementById("stopButton").onclick =
 
 document.getElementById("resetButton").onclick =
     function () {
-        let url = serverUrl + "/control";
+        let url = serverUrl + '/control';
 
-        fetch(url + "/reset", {
+        fetch(url + '/reset', {
             method: "POST"
         })
             .then(resp => {
