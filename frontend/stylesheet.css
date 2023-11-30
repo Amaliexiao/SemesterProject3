@@ -256,7 +256,8 @@ BUTTONS FROM THIS POINT
 .productionButtons {
     display: flex;
     flex-wrap: wrap;
-    max-width: 55.25em;
+    /*max-width: 55.25em;*/
+
 }
 
 .buttonLogic {
@@ -267,6 +268,52 @@ BUTTONS FROM THIS POINT
     font-family: arial, sans-serif;
 
 }
+
+.currentStateContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1em 2em;
+    width: calc(100%/3);
+    justify-content: center;
+}
+
+.stateLabel {
+    font-family: arial, sans-serif;
+}
+
+.currentStateDisplay {
+    display: flex;
+    margin-right: 2em;
+    border: black 1px solid;
+    background: #dddddd;
+    align-items: center;
+}
+
+.stateContent {
+    display: flex;
+    font-family: arial, sans-serif;
+    font-size: large;
+    align-items: center;
+}
+
+.stateColor {
+    padding: 10px;
+    border: 1px solid black;
+    width: 8px;
+    height: 8px;
+    margin: 1em;
+    background: antiquewhite;
+}
+
+.stateNumber {
+    padding-right: 5px;
+}
+
+.stateText {
+    padding-left: 5px;
+    padding-right: 1em;
+}
+
 
 /*
 BATCH REPORTS FROM THIS POINT

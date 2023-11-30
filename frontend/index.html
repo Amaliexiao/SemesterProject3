@@ -366,18 +366,31 @@
         <button type="button" class="buttonLogic" id="startButton">
             Start
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="stopButton">
             Stop
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="resetButton">
             Reset
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="clearButton">
             Clear
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="abortButton">
             Abort
         </button>
+    </div>
+    <div class="currentStateContainer" id="currentStateContainer">
+        <h2 class="stateLabel">Current State</h2>
+        <div class="currentStateDisplay" id="currentStateDisplay">
+            <div class="stateColor" id="stateColor"></div>
+            <div class ="stateContent">
+                <p class="stateNumber" id="stateNumber">4</p>
+                <p> - </p>
+                <p class="stateText" id="stateText">Stopped</p>
+            </div>
+
+        </div>
+
     </div>
     <div class="batchReports">
         <table class="reportTable">
