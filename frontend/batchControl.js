@@ -16,10 +16,39 @@ document.getElementById("submitBatch").onclick =
         var dropdownMenu = document.getElementById("typeOfBeer");
         var spinner = document.getElementById("batchSize");
 
-        let beerType = dropdownMenu.value;
+        let beerType = parseInt(dropdownMenu.value)+1;
         let size = spinner.value;
-        let speed = slider.value;
+        let speedPercentage = slider.value;
+        let speed;
         let url = "http://localhost:8080/database";
+        //
+        // if(beerType==1){
+        //     speed = 300*speedPercentage/100;
+        // }
+        // else {
+        //     console.log("wack");
+        // }
+
+        switch (beerType-1){
+            case 0:
+                speed = 600*speedPercentage/100;
+                break;
+            case 1:
+                speed = 300*speedPercentage/100;
+                break;
+            case 2:
+                speed = 150*speedPercentage/100;
+                break;
+            case 3:
+                speed = 200*speedPercentage/100;
+                break;
+            case 4:
+                speed = 100*speedPercentage/100;
+                break;
+            case 5:
+                speed = 125*speedPercentage/100;
+                break;
+        }
 
         fetch(url + "/addBatch?userID=1&size="+size+"&beerType="+beerType+"&speed="+speed, {
             method: "POST"
