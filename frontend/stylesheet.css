@@ -40,8 +40,7 @@ The logic behind the queue.
     border-collapse: collapse;
     padding: 16px;
     margin-right: 20px;
-
-
+    overflow: auto;
 }
 
 .progressAlignment {
