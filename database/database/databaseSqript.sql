@@ -17,7 +17,7 @@ CREATE TABLE Users
     password VARCHAR(255)        NOT NULL
 );
 
-CREATE TABLE Batches
+CREATE TABLE BatchRepports
 (
     id                SERIAL PRIMARY KEY,
     userId            INTEGER REFERENCES Users (id),
@@ -40,7 +40,7 @@ CREATE TABLE Batches
     highVib           FLOAT     NOT NULL
 );
 
-CREATE TABLE QueuedBatches
+CREATE TABLE Batches
 (
     id       SERIAL PRIMARY KEY,
     userId   INTEGER,

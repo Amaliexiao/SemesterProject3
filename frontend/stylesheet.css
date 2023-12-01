@@ -55,8 +55,11 @@ The logic behind the queue.
     color: dodgerblue;
 }
 .close {
+    border: none;
     font-size: 24px;
-    color: red;
+    color: white;
+    border-radius:60%;
+    background-color: red;
 }
 
 .batchProgress {

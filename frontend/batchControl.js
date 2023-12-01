@@ -2,6 +2,7 @@ function showBatchPopup() {
     var popup = document.getElementById("batchPopup");
     popup.classList.toggle("show");
 }
+let url = "http://localhost:8080/queue"
 
 var slider = document.getElementById("speedSlider");
 var output = document.getElementById("sliderValue");
@@ -21,8 +22,6 @@ document.getElementById("submitBatch").onclick =
         let size = spinner.value;
         let speedPercentage = slider.value;
         let speed;
-        let url = "http://localhost:8080/database"
-
         switch (beerType - 1) {
             case 0:
                 speed = 600 * speedPercentage / 100;
@@ -63,7 +62,7 @@ document.getElementById("submitBatch").onclick =
     }
 // Function to fetch batch queue data
 function fetchBatchQueue() {
-    fetch("http://localhost:8080/database/getBatchQueue")
+    fetch(url+"/getBatchQueue")
         .then(response => response.json())
         .then(data => {
             // Call a function to update the HTML with the fetched data
@@ -91,11 +90,30 @@ function updateBatchQueueTable(batchQueueData) {
         <progress id="beerProgress${index + 1}" value="32" max="100">32</progress>
         <ion-icon class="arrow" name="arrow-round-up"></ion-icon>
         <ion-icon class="arrow" name="arrow-round-down"></ion-icon>
-        <ion-icon class="close" name="close-circle"></ion-icon>
-</div>
-        
+        <button type="button" class="close" onclick="removeBatchFromQueue(${batch.id})">X</button>
+</div>  
             `;
         cell2.innerHTML = index + 1;
     });
+}
+function removeBatchFromQueue(id){
+    let beerId = id;
+    fetch(url+"/removeBatch?batchId="+beerId,{
+        method: "POST"
+    })
+        .then(resp => {
+            if (resp.status === 200) {
+                return resp.json();
+            } else {
+                throw new Error(resp.toString())
+            }
+        })
+        .then(data =>
+            console.log(data))
+        .catch(error => {
+                console.error('Error:', error)
+            }
+        );
+    location.reload();
 }
 

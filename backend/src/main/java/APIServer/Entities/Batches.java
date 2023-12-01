@@ -3,7 +3,7 @@ package APIServer.Entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Queuedbatches {
+public class Batches {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
