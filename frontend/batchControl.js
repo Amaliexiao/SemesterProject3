@@ -10,7 +10,7 @@ output.innerHTML = slider.value;
 slider.oninput = function () {
     output.innerHTML = this.value;
 }
-reloade();
+document.addEventListener( "DOMContentLoaded", fetchBatchQueue, false );
 
 document.getElementById("submitBatch").onclick =
     function () {
@@ -61,10 +61,6 @@ document.getElementById("submitBatch").onclick =
                 }
             );
     }
-    function reloade(){
-        fetchBatchQueue();
-        setInterval(fetchBatchQueue,60000);
-    }
 // Function to fetch batch queue data
 function fetchBatchQueue() {
     fetch("http://localhost:8080/database/getBatchQueue")
@@ -89,27 +85,16 @@ function updateBatchQueueTable(batchQueueData) {
         const row = table.insertRow(index + 1);
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
-
         // Set cell content based on batch data
         cell1.innerHTML = `
-           <div id="queue${index + 1}">
-        ipa:04
-    </div>
+ <div id="queue${index + 1}"> ${batch.beerId.name}:${batch.id} 
+    <ion-icon class="arrow" name="arrow-round-up"></ion-icon>
+        <ion-icon class="arrow" name="arrow-round-down"></ion-icon>
+        <ion-icon class="close" name="close-circle"></ion-icon></div>
     <div class="batchProgress">
-        <progress id="beerProgress${index + 1}" value="32" max="100">
-            32
-        </progress>
-    </div>
-    <div class="arrowUp">
-        <ion-icon name="arrow-round-up"></ion-icon>
-    </div>
-    <div class="arrowDown">
-        <ion-icon name="arrow-round-down"></ion-icon>
-    </div>
-    <div class="close">
-        <ion-icon name="close-circle"></ion-icon>
-    </div>
-                `;
+        <progress id="beerProgress${index + 1}" value="32" max="100">32</progress>
+    </div> 
+            `;
         cell2.innerHTML = index + 1;
     });
 }

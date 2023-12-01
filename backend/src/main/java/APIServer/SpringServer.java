@@ -31,7 +31,7 @@ public class SpringServer implements CommandLineRunner {
             beers.setName(name);
             beerRepo.save(beers);
         }
-        else System.out.println("already added");
+//        else System.out.println("already added");
     }
     private void runCreateAndSave(){
         createAndSaveBeer("Pilsner");

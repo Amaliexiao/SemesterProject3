@@ -35,17 +35,17 @@ function setIngredientAmount(apiEndpoint, elementID) {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
 
             let Value = specificValue/35000*100;
             // Display the API response on the HTML page
             document.getElementById(elementID).setAttribute("style", "height:"+Value+'px');
-            console.log(elementID);
+            // console.log(elementID);
             ;
         })
         .catch(error => {
@@ -74,11 +74,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
 
             let maintenanceValue = specificValue/35000*100;
@@ -112,11 +112,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('temperature').textContent=specificValue;
@@ -147,11 +147,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('humidity').textContent=specificValue;
@@ -182,11 +182,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('vibration').textContent=specificValue;
@@ -217,11 +217,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('batchID').textContent=specificValue;
@@ -252,11 +252,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('prod/min').textContent=specificValue;
@@ -287,11 +287,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('acceptableProducts').textContent=specificValue;
@@ -322,11 +322,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('defectProducts').textContent=specificValue;
@@ -358,11 +358,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             const batchSize = "";
             let remainingProducts = batchSize - specificValue;
@@ -394,11 +394,11 @@ setInterval(function(){
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value Total Products:', specificValue);
+            // console.log('Specific Value Total Products:', specificValue);
             // Display the API response on the HTML page
             document.getElementById('totalProducts').textContent=specificValue;
         })
@@ -465,14 +465,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
             const elementToColor = document.getElementById('stateColor');
             const stateText = document.getElementById('stateText');
 
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
             document.getElementById('stateNumber').textContent=specificValue;
