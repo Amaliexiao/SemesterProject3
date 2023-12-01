@@ -41,7 +41,7 @@ The logic behind the queue.
     padding: 16px;
     margin-right: 20px;
     overflow: auto;
-    min-width: 300px;
+    min-width: 400px;
 }
 
 .progressAlignment {

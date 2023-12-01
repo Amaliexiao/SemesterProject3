@@ -88,12 +88,12 @@ function updateBatchQueueTable(batchQueueData) {
         // Set cell content based on batch data
         cell1.innerHTML = `
  <div id="queue${index + 1}"> ${batch.beerId.name}:${batch.id} 
-    <ion-icon class="arrow" name="arrow-round-up"></ion-icon>
-        <ion-icon class="arrow" name="arrow-round-down"></ion-icon>
-        <ion-icon class="close" name="close-circle"></ion-icon></div>
-    <div class="batchProgress">
         <progress id="beerProgress${index + 1}" value="32" max="100">32</progress>
-    </div> 
+        <ion-icon class="arrow" name="arrow-round-up"></ion-icon>
+        <ion-icon class="arrow" name="arrow-round-down"></ion-icon>
+        <ion-icon class="close" name="close-circle"></ion-icon>
+</div>
+        
             `;
         cell2.innerHTML = index + 1;
     });
