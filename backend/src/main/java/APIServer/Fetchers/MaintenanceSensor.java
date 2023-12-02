@@ -24,8 +24,15 @@ public class MaintenanceSensor {
 
     @CrossOrigin
     @GetMapping("/maintenanceCounter")
-    public Variant getmaintenanceCounter(){
+    public Variant getMaintenanceCounter(){
         Variant maintenanceCounter = opcUaConfig.getNodeValue("ns=6;s=::Program:Maintenance.Counter");
+        return maintenanceCounter;
+    }
+
+    @CrossOrigin
+    @GetMapping("/maintenanceState")
+    public Variant getMaintenanceState(){
+        Variant maintenanceCounter = opcUaConfig.getNodeValue("ns=6;s=::Program:Maintenance.State");
         return maintenanceCounter;
     }
 }
