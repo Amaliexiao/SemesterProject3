@@ -25,7 +25,7 @@ public class AcceptableProduct {
     @CrossOrigin
     @GetMapping("/acceptableProductsValue")
     public Variant getAcceptableProductValue() {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Admin.ProdProcessedCount");
+        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:product.good");
         Variant sensorValue = null;
         try {
             DataValue sensorData = opcUaConfig.getOpcUaConfig().readValue(0, TimestampsToReturn.Both, sensorNodeId).get();
