@@ -2,16 +2,19 @@ function showBatchPopup() {
     var popup = document.getElementById("batchPopup");
     popup.classList.toggle("show");
 }
+
 let url = "http://localhost:8080/queue"
 
 var slider = document.getElementById("speedSlider");
 var output = document.getElementById("sliderValue");
 output.innerHTML = slider.value;
 
+let queueList;
+
 slider.oninput = function () {
     output.innerHTML = this.value;
 }
-document.addEventListener( "DOMContentLoaded", fetchBatchQueue, false );
+document.addEventListener("DOMContentLoaded", fetchBatchQueue, false);
 
 document.getElementById("submitBatch").onclick =
     function () {
@@ -60,12 +63,16 @@ document.getElementById("submitBatch").onclick =
                 }
             );
     }
+
 // Function to fetch batch queue data
 function fetchBatchQueue() {
-    fetch(url+"/getBatchQueue")
-        .then(response => response.json())
+    fetch(url + "/getBatchQueue")
+        .then(response => {
+            return response.json();
+        })
         .then(data => {
             // Call a function to update the HTML with the fetched data
+            queueList = data;
             updateBatchQueueTable(data);
         })
         .catch(error => console.error('Error fetching batch queue:', error));
@@ -96,9 +103,10 @@ function updateBatchQueueTable(batchQueueData) {
         cell2.innerHTML = index + 1;
     });
 }
-function removeBatchFromQueue(id){
+
+function removeBatchFromQueue(id) {
     let beerId = id;
-    fetch(url+"/removeBatch?batchId="+beerId,{
+    fetch(url + "/removeBatch?batchId=" + beerId, {
         method: "POST"
     })
         .then(resp => {
@@ -114,6 +122,10 @@ function removeBatchFromQueue(id){
                 console.error('Error:', error)
             }
         );
-    location.reload();
+   updateBatchQueueTable(queueList);
 }
+
+
+
+
 

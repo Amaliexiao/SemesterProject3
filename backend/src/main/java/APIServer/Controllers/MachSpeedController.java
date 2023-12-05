@@ -7,7 +7,7 @@ import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/control")
 public class MachSpeedController {

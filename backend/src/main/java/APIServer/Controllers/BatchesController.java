@@ -47,9 +47,9 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/getBatchQueue")
-    public ResponseEntity<List<Batches>> getQueue() {
+    public List<Batches> getQueue() {
         List<Batches> queue = this.batchRepo.findAll();
-        return ResponseEntity.ok(queue);
+        return queue;
     }
 
     @CrossOrigin

@@ -17,7 +17,7 @@ public class StateController {
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
     @CrossOrigin
-    @GetMapping("/newState")
+    @PostMapping("/newState")
     public void changeCntrlValue(@RequestParam(name = "newValue") int newValue) throws Exception {
         NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.CntrlCmd");
         Variant v = new Variant(newValue);
@@ -37,6 +37,7 @@ public class StateController {
     @CrossOrigin
     @PostMapping("/start")
     public void startRequest() throws Exception{
+
         changeCntrlValue(2);
         changeCntrlRequest(1);
     }
