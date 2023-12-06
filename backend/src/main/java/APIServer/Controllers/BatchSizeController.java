@@ -25,6 +25,11 @@ public class BatchSizeController {
         opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
     }
 
+    @CrossOrigin
+    @PostMapping("/getBatchSize")
+    public int getBatchSize(@RequestParam(name="batchId") int batchId) throws Exception {
+
+    }
 
 }
 

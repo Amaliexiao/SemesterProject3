@@ -45,7 +45,7 @@ function setIngredientAmount(apiEndpoint, elementID) {
 
             let Value = specificValue / 35000 * 100;
             // Display the API response on the HTML page
-            document.getElementById(elementID).setAttribute("style", "height:" + Value + 'px');
+            document.getElementById(elementID).setAttribute("style", "height:"+Value+'%');
             // console.log(elementID);
             ;
         })
@@ -55,7 +55,36 @@ function setIngredientAmount(apiEndpoint, elementID) {
             document.getElementById(elementID).innerHTML = `Error: ${error.message}`;
         });
 };
+// Empty Inventory Alert
+function checkIfEmpty(apiEndpoint, elementName) {
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            // console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            // console.log('Specific Value:', specificValue);
+
+            if(specificValue == 0) {
+                alert("Please refill " + elementName);
+            };
+            ;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+        });
+}
 // Maintenance
 
 setInterval(function () {
@@ -93,6 +122,45 @@ setInterval(function () {
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
 }, 1000);
+
+
+// Maintance Alert
+setInterval(function() {
+    const apiEndpoint = serverUrl + '/fetch/maintenanceState';
+
+    // Make the API call using fetch
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            // console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const maintenanceState = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            // console.log('Maintenece State', maintenanceState);
+
+            if (maintenanceState == 20) {
+                document.getElementById("customAlert").style.display="block";
+            } else {
+                document.getElementById("customAlert").style.display="none";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+            document.getElementById('result').innerHTML = `Error: ${error.message}`;
+        });
+
+}, 1000);
+
 
 // Temperature Sensor
 
@@ -343,8 +411,7 @@ setInterval(function () {
 
 setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-    const apiEndpoint = serverUrl + '/fetch/acceptableProductsValue';
-
+    const apiEndpoint = serverUrl + '/fetch/remainingProducts';
 
     // Make the API call using fetch
     fetch(apiEndpoint)
@@ -358,15 +425,13 @@ setInterval(function () {
             return response.json();
         })
         .then(data => {
-            // Access and print the values from the JSON response
-            // console.log('API Response:', data);
+            console.log(typeof data)
+            console.log('API Response:', data);
 
-            // Example: Access a specific value from the JSON
-            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            // console.log('Specific Value:', specificValue);
+            const specificValue = data; // Replace 'propertyName' with the actual property name in your JSON
+            console.log('Remaining products:', specificValue);
+            document.getElementById('remainingProducts').textContent=specificValue;
 
-            const batchSize = "";
-            let remainingProducts = batchSize - specificValue;
             // Display the API response on the HTML page
             //document.getElementById('defectProducts').textContent=remainingProducts;
         })
