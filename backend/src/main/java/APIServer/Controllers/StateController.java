@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/control")
 public class StateController {
 
@@ -34,35 +35,35 @@ public class StateController {
     }
 
     @CrossOrigin
-    @GetMapping("/start")
+    @PostMapping("/start")
     public void startRequest() throws Exception{
         changeCntrlValue(2);
         changeCntrlRequest(1);
     }
 
     @CrossOrigin
-    @GetMapping("/reset")
+    @PostMapping("/reset")
     public void resetRequest() throws Exception{
         changeCntrlValue(1);
         changeCntrlRequest(1);
     }
 
     @CrossOrigin
-    @GetMapping("/stop")
+    @PostMapping("/stop")
     public void stopRequest() throws Exception{
         changeCntrlValue(3);
         changeCntrlRequest(1);
     }
 
     @CrossOrigin
-    @GetMapping("/abort")
+    @PostMapping("/abort")
     public void abortRequest() throws Exception{
         changeCntrlValue(4);
         changeCntrlRequest(1);
     }
 
     @CrossOrigin
-    @GetMapping("/clear")
+    @PostMapping("/clear")
     public void clearRequest() throws Exception{
         changeCntrlValue(5);
         changeCntrlRequest(1);

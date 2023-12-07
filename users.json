@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "username": "user1",
+    "password": "password1",
+    "hashedPassword": "$2b$10$l.i4CzWFj6wS3IiuIZLeDudVWg.bEegPdijwumOCBLZh7ZlRPmNeG"
+  },
+  {
+    "id": 2,
+    "username": "user2",
+    "password": "password2",
+    "hashedPassword": "$2b$10$PwDg6Hrirvk9VIXw0C0SVOKBiRWkihQlGM1wuvc3AVzE2QkzQUe92"
+  }
+]

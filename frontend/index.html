@@ -3,7 +3,9 @@
 <head>
     <title>Beer Machine</title>
     <link rel="stylesheet" href="stylesheet.css"/>
-    <script src="frontend.js" defer></script>
+    <script src="sensorFunctionality.js" defer></script>
+    <script src="buttonFunctionality.js" defer></script>
+    <script src="batchControl.js" defer></script>
 </head>
 <body class="body">
 <div class="header">
@@ -15,6 +17,29 @@
     </div>
 </div>
 <div class="body">
+</div>
+<div class="popup">
+    <span class="popuptext" id="batchPopup">
+        <h1>Create Batch</h1>
+        <form method="POST">
+        <h3>Choose type of beer</h3>
+             <select name="beerType" id="typeOfBeer">
+                 <option value="none" selected disabled hidden>Select beer</option>
+                 <option value="0">Pilsner</option>
+                 <option value="1">Wheat</option>
+                 <option value="2">IPA</option>
+                 <option value="3">Stout</option>
+                 <option value="4">Ale</option>
+                 <option value="5">Alc Free</option>
+    </select>
+        <h3>Choose size for this batch</h3>
+            <input id="batchSize" TYPE="NUMBER" MIN="1" MAX="65535" STEP="1" VALUE="100" SIZE="6">
+        <h3>Choose speed for production</h3>
+            <input id="speedSlider" type="range" class="slider" min="0" max="100" value="20">
+             <p>Value: <span id="sliderValue"></span> %</p>
+        <input id="submitBatch" type="submit"> </input>
+    </form>
+    </span>
 </div>
 <div class="inputContainer">
     <div class="queueTable">
@@ -193,7 +218,7 @@
             </b>
         </div>
         <div class="maintenanceContainer">
-            <div class="maintenanceBar">
+            <div class="maintenanceBar" id="maintenance">
             </div>
         </div>
     </div>
@@ -210,7 +235,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="temperature">
                     25.0
                 </b>
             </div>
@@ -225,7 +250,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="humidity">
                     49.0
                 </b>
             </div>
@@ -240,7 +265,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="vibration">
                     0.0
                 </b>
             </div>
@@ -255,7 +280,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="batchID">
                     04
                 </b>
             </div>
@@ -270,7 +295,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="prod/min">
                     1.0
                 </b>
             </div>
@@ -285,7 +310,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="acceptableProducts">
                     16
                 </b>
             </div>
@@ -300,7 +325,7 @@
                 </b>
             </div>
             <div class="sensorValue">
-                <b>
+                <b id="defectProducts">
                     3
                 </b>
             </div>
@@ -328,31 +353,44 @@
                 <b>Total Produced</b>
             </div>
             <div class="sensorValue">
-                <b>19</b>
+                <b id="totalProducts">19</b>
             </div>
         </div>
     </div>
 </div>
 <div class="lowerContainer">
     <div class="productionButtons">
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="createBatch" onclick="showBatchPopup()">
             Create Batch
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="startButton">
             Start
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="stopButton">
             Stop
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="resetButton">
             Reset
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="clearButton">
             Clear
         </button>
-        <button type="button" class="buttonLogic">
+        <button type="button" class="buttonLogic" id="abortButton">
             Abort
         </button>
+    </div>
+    <div class="currentStateContainer" id="currentStateContainer">
+        <h2 class="stateLabel">Current State</h2>
+        <div class="currentStateDisplay" id="currentStateDisplay">
+            <div class="stateColor" id="stateColor"></div>
+            <div class ="stateContent">
+                <p class="stateNumber" id="stateNumber">4</p>
+                <p> - </p>
+                <p class="stateText" id="stateText">Stopped</p>
+            </div>
+
+        </div>
+
     </div>
     <div class="batchReports">
         <table class="reportTable">

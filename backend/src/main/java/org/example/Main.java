@@ -9,9 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
-public class Main implements CommandLineRunner {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+public class Main {
     public static void main(String[] args) {
 
         try {
@@ -27,10 +25,5 @@ public class Main implements CommandLineRunner {
             System.out.println(e.getMessage());
         }
 
-    }
-    @Override
-    public void run(String... args) throws Exception {
-        SpringToPostgresConnectionHandler handler = new SpringToPostgresConnectionHandler(jdbcTemplate);
-        System.out.println(handler.getBeer(1));
     }
 }

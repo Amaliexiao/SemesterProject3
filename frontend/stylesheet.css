@@ -157,7 +157,6 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     margin-left: 25px;
     margin-top: 10px;
     margin-bottom: -10px;
-
 }
 
 .maintenanceContainer {
@@ -170,6 +169,7 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     height: 50px;
     float: left;
     border: 1px solid black;
+    z-index: 1; /* Set a lower z-index for the maintenance container */
 }
 
 .maintenanceBar {
@@ -181,6 +181,7 @@ This part keeps track of the quantity of Barley, Hops, Wheat, etc.
     box-sizing: border-box;
     animation: slide 1.5s ease-out forwards;
     transform-origin: left;
+    z-index: 0; /* Set a lower z-index for the maintenance bar */
 }
 
 @keyframes slide {
@@ -255,7 +256,8 @@ BUTTONS FROM THIS POINT
 .productionButtons {
     display: flex;
     flex-wrap: wrap;
-    max-width: 55.25em;
+    /*max-width: 55.25em;*/
+
 }
 
 .buttonLogic {
@@ -266,6 +268,52 @@ BUTTONS FROM THIS POINT
     font-family: arial, sans-serif;
 
 }
+
+.currentStateContainer{
+    display: flex;
+    flex-direction: column;
+    margin: 1em 2em;
+    width: calc(100%/3);
+    justify-content: center;
+}
+
+.stateLabel {
+    font-family: arial, sans-serif;
+}
+
+.currentStateDisplay {
+    display: flex;
+    margin-right: 2em;
+    border: black 1px solid;
+    background: #dddddd;
+    align-items: center;
+}
+
+.stateContent {
+    display: flex;
+    font-family: arial, sans-serif;
+    font-size: large;
+    align-items: center;
+}
+
+.stateColor {
+    padding: 10px;
+    border: 1px solid black;
+    width: 8px;
+    height: 8px;
+    margin: 1em;
+    background: antiquewhite;
+}
+
+.stateNumber {
+    padding-right: 5px;
+}
+
+.stateText {
+    padding-left: 5px;
+    padding-right: 1em;
+}
+
 
 /*
 BATCH REPORTS FROM THIS POINT
@@ -306,4 +354,33 @@ BATCH REPORTS FROM THIS POINT
 
 .reportHeader {
     width: 50%;
+}
+
+.popup {
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    display: inline-block;
+    cursor: pointer;
+    z-index: 2; /* Set a higher z-index for the popup */
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    background-color: #E0FFFF;
+    width: 20rem;
+    font-family: Arial, sans-serif;
+    border-radius: 3px;
+    visibility: hidden;
+    color: #000000;
+    text-align: center;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 20;
+    /* Remove the bottom and left properties */
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
 }

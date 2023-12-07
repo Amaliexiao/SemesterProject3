@@ -1,5 +1,6 @@
 package APIServer.Fetchers;
 
+
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
@@ -17,15 +18,15 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/fetch")
-public class TemperatureSensor {
+public class MachSpeed {
 
     ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
     @CrossOrigin
-    @GetMapping("/temperatureValue")
-    public Variant getTemperatureValue() {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Status.Parameter[3].Value");
+    @GetMapping("/MachSpeedValue")
+    public Variant getCurMachSpeedValue() {
+        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Status.MachSpeed");
         Variant sensorValue = null;
         try {
             DataValue sensorData = opcUaConfig.getOpcUaConfig().readValue(0, TimestampsToReturn.Both, sensorNodeId).get();
@@ -37,3 +38,5 @@ public class TemperatureSensor {
         return sensorValue;
     }
 }
+
+
