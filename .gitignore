@@ -5,3 +5,4 @@ database/database/.idea
 node-server/node_modules
 node-server/.idea
 .idea/
+.m2
