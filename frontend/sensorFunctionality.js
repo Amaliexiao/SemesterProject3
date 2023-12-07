@@ -26,7 +26,7 @@ setInterval(function () {
     const elementNameYeast = 'yeast';
     setIngredientAmount(apiEndpointYeast, elementNameYeast);
     checkIfEmpty(apiEndpointYeast, elementNameYeast);
-}, 10);
+}, 1000);
 
 function setIngredientAmount(apiEndpoint, elementID) {
     fetch(apiEndpoint)
