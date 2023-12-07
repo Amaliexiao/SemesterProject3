@@ -17,27 +17,36 @@ CREATE TABLE Users
     password VARCHAR(255)        NOT NULL
 );
 
-CREATE TABLE BatchRepports
+CREATE TABLE completed_batches
 (
     id                SERIAL PRIMARY KEY,
-    userId            INTEGER REFERENCES Users (id),
-    beerId            INTEGER REFERENCES Beers (id),
+    userid            INTEGER REFERENCES Users (id),
+    beertype           INTEGER REFERENCES Beers (id),
     speed             INTEGER   NOT NULL,
     size              INTEGER   NOT NULL,
-    startTime         TIMESTAMP NOT NULL,
-    stopTime          TIMESTAMP NOT NULL,
-    heldStateDuration FLOAT     NOT NULL,
-    successfulBeers   INTEGER   NOT NULL,
-    failedBeers       INTEGER   NOT NULL,
-    lowTemp           FLOAT     NOT NULL,
-    meanTemp          FLOAT     NOT NULL,
-    highTemp          FLOAT     NOT NULL,
-    loweHum           FLOAT     NOT NULL,
-    meanHum           FLOAT     NOT NULL,
-    highHum           FLOAT     NOT NULL,
-    lowVib            FLOAT     NOT NULL,
-    meanVib           FLOAT     NOT NULL,
-    highVib           FLOAT     NOT NULL
+    start_time         TIMESTAMP,
+    stop_time          TIMESTAMP,
+    heldStateDuration FLOAT,
+    successful_beers   INTEGER ,
+    failed_beers       INTEGER
+);
+
+CREATE TABLE Temperature(
+    id SERIAL PRIMARY KEY,
+    batchId INTEGER REFERENCES completed_batches (id),
+    Temperature float NOT NULL
+);
+
+CREATE TABLE Humidity(
+    id SERIAL PRIMARY KEY,
+    batchId INTEGER REFERENCES completed_batches (id),
+    Humidity float NOT NULL
+);
+
+CREATE TABLE Vibration(
+    id SERIAL PRIMARY KEY,
+    batchId INTEGER REFERENCES completed_batches (id),
+    Vibration float NOT NULL
 );
 
 CREATE TABLE Batches

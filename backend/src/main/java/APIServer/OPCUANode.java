@@ -29,7 +29,15 @@ public abstract class OPCUANode {
         return sensorValue;
     }
 
-    public void setNodeValue(String nodeID, float newValue){
+    public void setNodeValueFloat(String nodeID, float newValue){
+        NodeId sensorNodeId = NodeId.parse(nodeID);
+        Variant v = new Variant(newValue);
+        DataValue dv = DataValue.valueOnly(v);
+        opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
+    }
+
+    public void setNodeValueInt(String nodeID, int newValue){
+        System.out.println("Setnodevalueint " + newValue);
         NodeId sensorNodeId = NodeId.parse(nodeID);
         Variant v = new Variant(newValue);
         DataValue dv = DataValue.valueOnly(v);
