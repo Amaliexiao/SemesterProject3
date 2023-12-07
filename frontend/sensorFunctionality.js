@@ -3,25 +3,30 @@ let state;
 setInterval(function () {
 
     const apiEndpointBarley = serverUrl + '/fetch/barley';
-    const elementIDBarley = 'barley';
-    setIngredientAmount(apiEndpointBarley, elementIDBarley);
+    const elementNameBarley = 'barley';
+    setIngredientAmount(apiEndpointBarley, elementNameBarley);
+    checkIfEmpty(apiEndpointBarley, elementNameBarley);
 
     const apiEndpointHops = serverUrl + '/fetch/hops';
-    const elementIDHops = 'hops';
-    setIngredientAmount(apiEndpointHops, elementIDHops);
+    const elementNameHops = 'hops';
+    setIngredientAmount(apiEndpointHops, elementNameHops);
+    checkIfEmpty(apiEndpointHops, elementNameHops);
 
-    const apiEndpointMalt = serverUrl + '/fetch/malt';
-    const elementIDMalt = 'malt';
-    setIngredientAmount(apiEndpointMalt, elementIDMalt);
+    const apiEndpointMalt =  serverUrl + '/fetch/malt';
+    const elementNameMalt = 'malt';
+    setIngredientAmount(apiEndpointMalt, elementNameMalt);
+    checkIfEmpty(apiEndpointMalt, elementNameMalt);
 
     const apiEndpointWheat = serverUrl + '/fetch/wheat';
-    const elementIDWheat = 'wheat';
-    setIngredientAmount(apiEndpointWheat, elementIDWheat);
+    const elementNameWheat = 'wheat';
+    setIngredientAmount(apiEndpointWheat, elementNameWheat);
+    checkIfEmpty(apiEndpointWheat, elementNameWheat);
 
     const apiEndpointYeast = serverUrl + '/fetch/yeast';
-    const elementIDYeast = 'yeast';
-    setIngredientAmount(apiEndpointYeast, elementIDYeast);
-}, 1000);
+    const elementNameYeast = 'yeast';
+    setIngredientAmount(apiEndpointYeast, elementNameYeast);
+    checkIfEmpty(apiEndpointYeast, elementNameYeast);
+}, 10);
 
 function setIngredientAmount(apiEndpoint, elementID) {
     fetch(apiEndpoint)
@@ -42,11 +47,10 @@ function setIngredientAmount(apiEndpoint, elementID) {
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
             // console.log('Specific Value:', specificValue);
 
-
-            let Value = specificValue / 35000 * 100;
+            let Value = specificValue/35000 * 100;
             // Display the API response on the HTML page
-            document.getElementById(elementID).setAttribute("style", "height:" + Value + 'px');
-            // console.log(elementID);
+            document.getElementById(elementID).setAttribute("style", "height:"+Value+'%');
+            console.log(elementID);
             ;
         })
         .catch(error => {
@@ -55,6 +59,37 @@ function setIngredientAmount(apiEndpoint, elementID) {
             document.getElementById(elementID).innerHTML = `Error: ${error.message}`;
         });
 };
+
+// Empty Inventory Alert
+function checkIfEmpty(apiEndpoint, elementName) {
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            console.log('Specific Value:', specificValue);
+
+            if(specificValue == 0) {
+                alert("Please refill " + elementName);
+            };
+            ;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+        });
+}
 
 // Maintenance
 
@@ -81,8 +116,8 @@ setInterval(function () {
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
             // console.log('Specific Value:', specificValue);
 
+            let maintenanceValue = specificValue/30000*100;
 
-            let maintenanceValue = specificValue / 35000 * 100;
             // Display the API response on the HTML page
             document.getElementById('maintenance').style.width = maintenanceValue + "%";
             ;
@@ -93,6 +128,44 @@ setInterval(function () {
             document.getElementById('result').innerHTML = `Error: ${error.message}`;
         });
 }, 1000);
+
+// Maintance Alert
+setInterval(function() {
+    const apiEndpoint = serverUrl + '/fetch/maintenanceState';
+
+    // Make the API call using fetch
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            // Access and print the values from the JSON response
+            console.log('API Response:', data);
+
+            // Example: Access a specific value from the JSON
+            const maintenanceState = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            console.log('Maintenece State', maintenanceState);
+
+            if (maintenanceState == 20) {
+                document.getElementById("customAlert").style.display="block";
+            } else {
+                document.getElementById("customAlert").style.display="none";
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Display the error on the HTML page
+            document.getElementById('result').innerHTML = `Error: ${error.message}`;
+        });
+
+}, 1000);
+
 
 // Temperature Sensor
 
