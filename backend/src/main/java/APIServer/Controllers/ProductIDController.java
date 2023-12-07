@@ -1,5 +1,6 @@
 package APIServer.Controllers;
 
+import APIServer.OPCUASession;
 import org.example.OpcUaConfig;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
@@ -10,18 +11,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @CrossOrigin
 @RestController
 @RequestMapping("/control")
-public class ProductIDController {
-
-    ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
-    OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
+public class ProductIDController extends OPCUASession {
 
     @CrossOrigin
     @PostMapping("/newProductID")
-    public void changeProductID(@RequestParam(name = "newValue") float newValue) throws Exception {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.Parameter[1].Value");
-        Variant v = new Variant(newValue);
-        DataValue dv = DataValue.valueOnly(v);
-        opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
+    public void changeMachSpeed(@RequestParam(name = "newValue") float newValue) {
+        setNodeValue("ns=6;s=::Program:Cube.Command.Parameter[1].Value", newValue);
     }
 
 

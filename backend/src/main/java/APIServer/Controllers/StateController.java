@@ -1,5 +1,6 @@
 package APIServer.Controllers;
 
+import APIServer.OPCUASession;
 import org.example.OpcUaConfig;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
@@ -11,27 +12,18 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @RestController
 @CrossOrigin
 @RequestMapping("/control")
-public class StateController {
-
-    ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
-    OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
+public class StateController extends OPCUASession {
 
     @CrossOrigin
     @PostMapping("/newState")
     public void changeCntrlValue(@RequestParam(name = "newValue") int newValue) throws Exception {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.CntrlCmd");
-        Variant v = new Variant(newValue);
-        DataValue dv = DataValue.valueOnly(v);
-        opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
+        setNodeValue("ns=6;s=::Program:Cube.Command.CntrlCmd",newValue);
     }
 
     @CrossOrigin
     @GetMapping("/newState2")
     public void changeCntrlRequest(@RequestParam(name = "newValue") int newValue) throws Exception {
-        NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.CmdChangeRequest");
-        Variant v = new Variant(true);
-        DataValue dv = DataValue.valueOnly(v);
-        opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
+        setNodeValue("ns=6;s=::Program:Cube.Command.CmdChangeRequest",newValue);
     }
 
     @CrossOrigin
