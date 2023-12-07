@@ -43,8 +43,9 @@ function sendSpeedParameter(speed) {
 }
 
 function sendBeerIdParameter(beerId) {
+    let beertype = beerId-1;
     let url = serverUrl + '/control';
-    fetch(url + "/newProductID?newValue=" + beerId, {
+    fetch(url + "/newProductID?newValue=" + beertype, {
         method: "POST"
     })
         .then(resp => {

@@ -4,17 +4,28 @@ function showBatchPopup() {
 }
 
 let url = "http://localhost:8080/queue"
-
+let queueList;
+var checkBox = document.getElementById("optimalSpeed");
 var slider = document.getElementById("speedSlider");
 var output = document.getElementById("sliderValue");
-output.innerHTML = slider.value;
 
-let queueList;
+output.innerHTML = slider.value;
 
 slider.oninput = function () {
     output.innerHTML = this.value;
 }
 document.addEventListener("DOMContentLoaded", fetchBatchQueue, false);
+window.onload=function (){
+    document.getElementById("optimalSpeed").addEventListener("click",checkSpeed);
+}
+
+function checkSpeed() {
+    if (checkBox.checked === true){
+        slider.disabled = true;
+    } else {
+        slider.disabled = false;
+    }
+}
 
 document.getElementById("submitBatch").onclick =
     function () {
@@ -25,44 +36,83 @@ document.getElementById("submitBatch").onclick =
         let size = spinner.value;
         let speedPercentage = slider.value;
         let speed;
-        switch (beerType - 1) {
-            case 0:
-                speed = 600 * speedPercentage / 100;
-                break;
-            case 1:
-                speed = 300 * speedPercentage / 100;
-                break;
-            case 2:
-                speed = 150 * speedPercentage / 100;
-                break;
-            case 3:
-                speed = 200 * speedPercentage / 100;
-                break;
-            case 4:
-                speed = 100 * speedPercentage / 100;
-                break;
-            case 5:
-                speed = 125 * speedPercentage / 100;
-                break;
+        if(checkBox.checked === true){
+            speed = optimalSpeed(beerType);
+                    }
+        else{
+            speed = calculateManualSpeed(beerType, speedPercentage);
         }
-
-        fetch(url + "/addBatch?userID=1&size=" + size + "&beerType=" + beerType + "&speed=" + speed, {
-            method: "POST"
-        })
-            .then(resp => {
-                if (resp.status === 200) {
-                    return resp.json();
-                } else {
-                    throw new Error(resp.toString())
-                }
-            })
-            .then(data =>
-                console.log(data))
-            .catch(error => {
-                    console.error('Error:', error)
-                }
-            );
+        addBatch(speed,size,beerType);
     }
+
+function calculateManualSpeed(beerType, speedPercentage) {
+    let speed;
+    switch (beerType - 1) {
+        case 0:
+            speed = 600 * speedPercentage / 100;
+            break;
+        case 1:
+            speed = 300 * speedPercentage / 100;
+            break;
+        case 2:
+            speed = 150 * speedPercentage / 100;
+            break;
+        case 3:
+            speed = 200 * speedPercentage / 100;
+            break;
+        case 4:
+            speed = 100 * speedPercentage / 100;
+            break;
+        case 5:
+            speed = 125 * speedPercentage / 100;
+            break;
+    }
+    return speed;
+}
+
+function optimalSpeed(beerType){
+    let speed;
+    switch (beerType - 1) {
+        case 0:
+            speed = 475;
+            break;
+        case 1:
+            speed = 171;
+            break;
+        case 2:
+            speed = 86;
+            break;
+        case 3:
+            speed = 0;
+            break;
+        case 4:
+            speed = 0;
+            break;
+        case 5:
+            speed = 0;
+            break;
+    }
+    return speed;
+}
+
+function addBatch(speed, size, beerType) {
+    fetch(url + "/addBatch?userID=1&size=" + size + "&beerType=" + beerType + "&speed=" + speed, {
+        method: "POST"
+    })
+        .then(resp => {
+            if (resp.status === 200) {
+                return resp.json();
+            } else {
+                throw new Error(resp.toString())
+            }
+        })
+        .then(data =>
+            console.log(data))
+        .catch(error => {
+                console.error('Error:', error)
+            }
+        );
+}
 
 // Function to fetch batch queue data
 function fetchBatchQueue() {
