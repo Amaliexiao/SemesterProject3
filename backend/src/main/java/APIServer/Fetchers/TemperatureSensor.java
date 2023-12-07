@@ -1,6 +1,6 @@
 package APIServer.Fetchers;
 
-import APIServer.OPCUASession;
+import APIServer.OPCUANode;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/fetch")
-public class TemperatureSensor extends OPCUASession {
+public class TemperatureSensor extends OPCUANode {
 
     @CrossOrigin
     @GetMapping("/temperatureValue")

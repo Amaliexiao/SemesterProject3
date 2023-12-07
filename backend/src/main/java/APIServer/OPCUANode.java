@@ -7,18 +7,14 @@ import org.eclipse.milo.opcua.stack.core.types.enumerated.TimestampsToReturn;
 import org.example.OpcUaConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.ExecutionException;
 
 
-public class OPCUASession {
+public abstract class OPCUANode {
 
     public ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
     public OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
-
-
 
     public Variant getNodeValue(String nodeID) {
         NodeId sensorNodeId = NodeId.parse(nodeID);
@@ -38,7 +34,5 @@ public class OPCUASession {
         Variant v = new Variant(newValue);
         DataValue dv = DataValue.valueOnly(v);
         opcUaConfig.getOpcUaConfig().writeValue(sensorNodeId, dv);
-
-
     }
 }

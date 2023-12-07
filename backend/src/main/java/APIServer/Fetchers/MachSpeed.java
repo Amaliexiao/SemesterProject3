@@ -1,7 +1,7 @@
 package APIServer.Fetchers;
 
 
-import APIServer.OPCUASession;
+import APIServer.OPCUANode;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/fetch")
-public class MachSpeed extends OPCUASession {
+public class MachSpeed extends OPCUANode {
 
     @CrossOrigin
     @GetMapping("/MachSpeedValue")
