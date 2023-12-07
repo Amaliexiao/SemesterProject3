@@ -485,6 +485,34 @@ setInterval(function () {
 }, 1000);
 
 
+//Remaining products
+setInterval(function () {
+    let getQueueBeerID = queueList[0].beerId.id;
+    const apiEndpoint = serverUrl + '/fetch/getRemainingProducts/' + getQueueBeerID;
+
+    // Function to make API call and return the parsed JSON
+    fetch(apiEndpoint)
+        .then(response => {
+            // Check if the request was successful (status code 200)
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            // Parse the JSON in the response
+            return response.json();
+        })
+        .then(data => {
+            const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+            document.getElementById('remainingProducts').textContent = specificValue;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('remainingProducts').innerHTML = `Error: ${error.message}`;
+        });
+    //code goes here that will be run every 5 seconds.
+}, 1000);
+
+
 // document.addEventListener("DOMContentLoaded", function () {
 //     const apiEndpoint = serverUrl + '/fetch/totalProducts';
 //
