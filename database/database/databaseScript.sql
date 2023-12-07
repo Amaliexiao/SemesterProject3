@@ -17,36 +17,35 @@ CREATE TABLE Users
     password VARCHAR(255)        NOT NULL
 );
 
-CREATE TABLE BatchRepports
-(
-    id                SERIAL PRIMARY KEY,
-    userId            INTEGER REFERENCES Users (id),
-    beerId            INTEGER REFERENCES Beers (id),
-    speed             INTEGER   NOT NULL,
-    size              INTEGER   NOT NULL,
-    startTime         TIMESTAMP NOT NULL,
-    stopTime          TIMESTAMP NOT NULL,
-    heldStateDuration FLOAT     NOT NULL,
-    successfulBeers   INTEGER   NOT NULL,
-    failedBeers       INTEGER   NOT NULL,
-    lowTemp           FLOAT     NOT NULL,
-    meanTemp          FLOAT     NOT NULL,
-    highTemp          FLOAT     NOT NULL,
-    loweHum           FLOAT     NOT NULL,
-    meanHum           FLOAT     NOT NULL,
-    highHum           FLOAT     NOT NULL,
-    lowVib            FLOAT     NOT NULL,
-    meanVib           FLOAT     NOT NULL,
-    highVib           FLOAT     NOT NULL
+CREATE TABLE Temperatures(
+    id          SERIAL PRIMARY KEY,
+    batchId     INTEGER REFERENCES Batches(id),
+    temp        FLOAT NOT NULL
+);
+
+CREATE TABLE Humidities(
+    id          SERIAL PRIMARY KEY,
+    batchId     INTEGER REFERENCES Batches(id),
+    humidity    FLOAT NOT NULL
+);
+
+CREATE TABLE Vibrations(
+    id          SERIAL PRIMARY KEY,
+    batchId     INTEGER REFERENCES Batches(id),
+    vibration   FLOAT NOT NULL
 );
 
 CREATE TABLE Batches
 (
-    id       SERIAL PRIMARY KEY,
-    userId   INTEGER,
-    size     INTEGER NOT NULL,
-    beertype INTEGER REFERENCES Beers (id),
-    speed    INTEGER NOT NULL
+    id              SERIAL PRIMARY KEY,
+    userId          INTEGER,
+    size            INTEGER NOT NULL,
+    beertype        INTEGER REFERENCES Beers (id),
+    speed           INTEGER NOT NULL,
+    startTime       TIMESTAMP,
+    stopTime        TIMESTAMP,
+    successfulBeers INTEGER,
+    failedBeers     INTEGER
 );
 
 INSERT INTO Users (email, username, password)

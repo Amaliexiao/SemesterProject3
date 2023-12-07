@@ -3,11 +3,9 @@ package APIServer.Controllers;
 import APIServer.Entities.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -37,6 +35,38 @@ public class BatchesController {
         batch.setUser(user);
 
         this.batchRepo.save(batch);
+    }
+
+    @CrossOrigin
+    @PostMapping("/saveStartTime")
+    public void saveStartTime(@RequestParam(name = "batchId") Long batchId) {
+        Batches batch = batchRepo.findById(batchId).get();
+        batch.setStartTime(new Timestamp(System.currentTimeMillis()));
+        batchRepo.save(batch);
+    }
+
+    @CrossOrigin
+    @PostMapping("/saveStopTime")
+    public void saveStopTime(@RequestParam(name = "batchId") Long batchId) {
+        Batches batch = batchRepo.findById(batchId).get();
+        batch.setStopTime(new Timestamp(System.currentTimeMillis()));
+        batchRepo.save(batch);
+    }
+
+    @CrossOrigin
+    @PostMapping("/saveSuccessfulBeers")
+    public void saveSuccessful(@RequestParam(name = "batchId") Long batchId, @RequestParam(name = "successfulBeers") int successfulBeers) {
+        Batches batch = batchRepo.findById(batchId).get();
+        batch.setSucesssfullBeers(successfulBeers);
+        batchRepo.save(batch);
+    }
+
+    @CrossOrigin
+    @PostMapping("/saveFailedBeers")
+    public void saveFailedful(@RequestParam(name = "batchId") Long batchId, @RequestParam(name = "failedBeers") int failedBeers) {
+        Batches batch = batchRepo.findById(batchId).get();
+        batch.setFailedBeers(failedBeers);
+        batchRepo.save(batch);
     }
 
     @CrossOrigin

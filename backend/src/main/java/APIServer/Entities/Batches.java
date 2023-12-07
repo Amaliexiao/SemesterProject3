@@ -1,6 +1,7 @@
 package APIServer.Entities;
 
 import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 public class Batches {
@@ -19,6 +20,10 @@ public class Batches {
     @JoinColumn(name = "beertype")
     private Beers beerId;
     private int speed;
+    private Timestamp startTime;
+    private Timestamp stopTime;
+    private int sucesssfullBeers;
+    private int failedBeers;
 
     public Long getId() {
         return id;
@@ -58,5 +63,37 @@ public class Batches {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public Timestamp getStopTime() {
+        return stopTime;
+    }
+
+    public void setStopTime(Timestamp stopTime) {
+        this.stopTime = stopTime;
+    }
+
+    public int getSucesssfullBeers() {
+        return sucesssfullBeers;
+    }
+
+    public void setSucesssfullBeers(int sucesssfullBeers) {
+        this.sucesssfullBeers = sucesssfullBeers;
+    }
+
+    public int getFailedBeers() {
+        return failedBeers;
+    }
+
+    public void setFailedBeers(int failedBeers) {
+        this.failedBeers = failedBeers;
     }
 }
