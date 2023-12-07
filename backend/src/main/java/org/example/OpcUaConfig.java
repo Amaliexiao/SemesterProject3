@@ -35,8 +35,8 @@ public class OpcUaConfig {
         //Create and configure te OpcUaClient
         OpcUaClient client = null;
         try {
-            this.hostname = "192.168.0.122"; // If you are running on the machine the hostname should be:"192.168.0.122"
-                                            // If you are running on simulation the hostname should be: "opc.tcp://localhost:12686/milo"
+            this.hostname = "localhost"; // If you are running on the machine the hostname should be:"192.168.0.122"
+                                            // If you are running on simulation the hostname should be: "localhost"
             this.port = 4840;
             List<EndpointDescription> endpoints = DiscoveryClient.getEndpoints(
                             "opc.tcp://" + hostname + ":" + port + "/milo")

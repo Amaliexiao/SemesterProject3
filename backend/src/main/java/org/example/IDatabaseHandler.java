@@ -14,5 +14,5 @@ public interface IDatabaseHandler {
             float highest_temp, float lowest_humidity, float mean_humidity, float highest_humidity, float lowest_vib,
             float mean_vib, float highest_vib);
     public boolean createUser(String email,     String name, String password);
-    public boolean addQueuedBatch(int userID, int size, int beerType, int speed);
+//    public boolean addQueuedBatch(int userID, int size, int beerType, int speed);
 }

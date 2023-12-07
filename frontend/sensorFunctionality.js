@@ -1,5 +1,6 @@
 const serverUrl = 'http://localhost:8080'
-setInterval( function() {
+let state;
+setInterval(function () {
 
     const apiEndpointBarley = serverUrl + '/fetch/barley';
     const elementIDBarley = 'barley';
@@ -9,7 +10,7 @@ setInterval( function() {
     const elementIDHops = 'hops';
     setIngredientAmount(apiEndpointHops, elementIDHops);
 
-    const apiEndpointMalt =  serverUrl + '/fetch/malt';
+    const apiEndpointMalt = serverUrl + '/fetch/malt';
     const elementIDMalt = 'malt';
     setIngredientAmount(apiEndpointMalt, elementIDMalt);
 
@@ -35,17 +36,17 @@ function setIngredientAmount(apiEndpoint, elementID) {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
 
-            let Value = specificValue/35000*100;
+            let Value = specificValue / 35000 * 100;
             // Display the API response on the HTML page
-            document.getElementById(elementID).setAttribute("style", "height:"+Value+'px');
-            console.log(elementID);
+            document.getElementById(elementID).setAttribute("style", "height:" + Value + 'px');
+            // console.log(elementID);
             ;
         })
         .catch(error => {
@@ -57,7 +58,7 @@ function setIngredientAmount(apiEndpoint, elementID) {
 
 // Maintenance
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/maintenanceCounter';
 
@@ -74,16 +75,16 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
 
-            let maintenanceValue = specificValue/35000*100;
+            let maintenanceValue = specificValue / 35000 * 100;
             // Display the API response on the HTML page
-            document.getElementById('maintenance').style.width=maintenanceValue + "%";
+            document.getElementById('maintenance').style.width = maintenanceValue + "%";
             ;
         })
         .catch(error => {
@@ -95,7 +96,7 @@ setInterval( function() {
 
 // Temperature Sensor
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/temperatureValue';
 
@@ -112,14 +113,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('temperature').textContent=specificValue;
+            document.getElementById('temperature').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -130,7 +131,7 @@ setInterval( function() {
 
 // Humidity Sensor
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/humidityValue';
 
@@ -147,14 +148,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('humidity').textContent=specificValue;
+            document.getElementById('humidity').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -165,7 +166,7 @@ setInterval( function() {
 
 // Vibration Sensor
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/vibrationValue';
 
@@ -182,14 +183,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('vibration').textContent=specificValue;
+            document.getElementById('vibration').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -200,7 +201,7 @@ setInterval( function() {
 
 // Batch ID
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/batchIDValue';
 
@@ -217,14 +218,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('batchID').textContent=specificValue;
+            document.getElementById('batchID').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -235,7 +236,7 @@ setInterval( function() {
 
 // Products/min
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/MachSpeedValue';
 
@@ -252,14 +253,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('prod/min').textContent=specificValue;
+            document.getElementById('prod/min').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -270,7 +271,7 @@ setInterval( function() {
 
 // Acceptable Products
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/acceptableProductsValue';
 
@@ -287,14 +288,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('acceptableProducts').textContent=specificValue;
+            document.getElementById('acceptableProducts').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -305,7 +306,7 @@ setInterval( function() {
 
 // Defect Products
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/defectProductsValue';
 
@@ -322,14 +323,14 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('defectProducts').textContent=specificValue;
+            document.getElementById('defectProducts').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -340,7 +341,7 @@ setInterval( function() {
 
 // Remaining Products - Missing Logic as it may have to find batch size in DB
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/acceptableProductsValue';
 
@@ -358,11 +359,11 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value:', specificValue);
+            // console.log('Specific Value:', specificValue);
 
             const batchSize = "";
             let remainingProducts = batchSize - specificValue;
@@ -378,7 +379,7 @@ setInterval( function() {
 
 // Total Produced
 
-setInterval(function(){
+setInterval(function () {
     const apiEndpoint = serverUrl + '/fetch/totalProducts';
 
     // Function to make API call and return the parsed JSON
@@ -394,13 +395,13 @@ setInterval(function(){
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-            console.log('Specific Value Total Products:', specificValue);
+            // console.log('Specific Value Total Products:', specificValue);
             // Display the API response on the HTML page
-            document.getElementById('totalProducts').textContent=specificValue;
+            document.getElementById('totalProducts').textContent = specificValue;
         })
         .catch(error => {
             console.error('Error:', error);
@@ -448,7 +449,7 @@ setInterval(function(){
 
 // Current State
 
-setInterval( function() {
+setInterval(function () {
     // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
     const apiEndpoint = serverUrl + '/fetch/currentStateValue';
 
@@ -465,92 +466,92 @@ setInterval( function() {
         })
         .then(data => {
             // Access and print the values from the JSON response
-            console.log('API Response:', data);
+            // console.log('API Response:', data);
 
             // Example: Access a specific value from the JSON
             const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
             const elementToColor = document.getElementById('stateColor');
             const stateText = document.getElementById('stateText');
-
-            console.log('Specific Value:', specificValue);
+            state = specificValue;
+            // console.log('Specific Value:', specificValue);
 
             // Display the API response on the HTML page
-            document.getElementById('stateNumber').textContent=specificValue;
+            document.getElementById('stateNumber').textContent = specificValue;
 
             //Change what state is shown in the UI
             switch (specificValue) {
                 case 0:
                     elementToColor.style.backgroundColor = 'red';
-                    stateText.textContent='Deactivated';
+                    stateText.textContent = 'Deactivated';
                     break;
                 case 1:
                     elementToColor.style.backgroundColor = 'blue';
-                    stateText.textContent='Clearing';
+                    stateText.textContent = 'Clearing';
                     break;
                 case 2:
                     elementToColor.style.backgroundColor = 'red';
-                    stateText.textContent='Stopped';
+                    stateText.textContent = 'Stopped';
                     break;
                 case 3:
                     elementToColor.style.backgroundColor = 'green';
-                    stateText.textContent='Starting';
+                    stateText.textContent = 'Starting';
                     break;
                 case 4:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Idle';
+                    stateText.textContent = 'Idle';
                     break;
                 case 5:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Suspended';
+                    stateText.textContent = 'Suspended';
                     break;
                 case 6:
                     elementToColor.style.backgroundColor = 'green';
-                    stateText.textContent='Execute';
+                    stateText.textContent = 'Execute';
                     break;
                 case 7:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Stopping';
+                    stateText.textContent = 'Stopping';
                     break;
                 case 8:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Aborting';
+                    stateText.textContent = 'Aborting';
                     break;
                 case 9:
                     elementToColor.style.backgroundColor = 'red';
-                    stateText.textContent='Aborted';
+                    stateText.textContent = 'Aborted';
                     break;
                 case 10:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Holding';
+                    stateText.textContent = 'Holding';
                     break;
                 case 11:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Held';
+                    stateText.textContent = 'Held';
                     break;
                 case 15:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Resetting';
+                    stateText.textContent = 'Resetting';
                     break;
                 case 16:
                     elementToColor.style.backgroundColor = 'green';
-                    stateText.textContent='Completing';
+                    stateText.textContent = 'Completing';
                     break;
                 case 17:
                     elementToColor.style.backgroundColor = 'green';
-                    stateText.textContent='Complete';
+                    stateText.textContent = 'Complete';
                     break;
                 case 18:
                     elementToColor.style.backgroundColor = 'yellow';
-                    stateText.textContent='Deactivating';
+                    stateText.textContent = 'Deactivating';
                     break;
                 case 19:
                     elementToColor.style.backgroundColor = 'green';
-                    stateText.textContent='Activating';
+                    stateText.textContent = 'Activating';
                     break;
                 default:
                     // Default color
                     elementToColor.style.backgroundColor = 'blue';
-                    stateText.textContent='*Default*';
+                    stateText.textContent = '*Default*';
             }
 
         })
