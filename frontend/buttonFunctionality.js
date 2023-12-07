@@ -83,7 +83,7 @@ async function processQueue() {
                     if (resp.status === 200) {
                         const data = await resp.json();
                         console.log('Processed Data:', data);
-                        await new Promise(resolve => setTimeout(resolve, 2000)); // Add delay if needed
+                        await new Promise(resolve => setTimeout(resolve, 500)); // Add delay if needed
                     } else {
                         throw new Error(resp.statusText);
                     }
@@ -92,10 +92,10 @@ async function processQueue() {
                 // If the state becomes 17, remove the batch and reset
                 if (state === 17) {
                     removeBatchFromQueue(queueList[0].id);
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    await new Promise(resolve => setTimeout(resolve, 1000));
                     await fetchBatchQueue();
                     reset();
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // Initial delay
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Initial delay
                     await startProcessing();
                 }
 

@@ -73,21 +73,19 @@ function fetchBatchQueue() {
         .then(data => {
             // Call a function to update the HTML with the fetched data
             queueList = data;
-            updateBatchQueueTable(data);
+            updateBatchQueueTable();
         })
         .catch(error => console.error('Error fetching batch queue:', error));
 }
 
 // Function to update the HTML table with batch queue data
-function updateBatchQueueTable(batchQueueData) {
+function updateBatchQueueTable() {
     const table = document.getElementById('batchQueueTable');
-    console.log(batchQueueData);
-
     // Clear existing rows
     table.innerHTML = '<tr><th>Queue</th><th>Nr.</th></tr>';
 
     // Loop through the batch queue data and append rows to the table
-    batchQueueData.forEach((batch, index) => {
+    queueList.forEach((batch, index) => {
         const row = table.insertRow(index + 1);
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
@@ -111,6 +109,7 @@ function removeBatchFromQueue(id) {
     })
         .then(resp => {
             if (resp.status === 200) {
+                fetchBatchQueue();
                 return resp.json();
             } else {
                 throw new Error(resp.toString())
@@ -122,7 +121,6 @@ function removeBatchFromQueue(id) {
                 console.error('Error:', error)
             }
         );
-   updateBatchQueueTable(queueList);
 }
 
 
