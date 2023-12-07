@@ -40,8 +40,8 @@ The logic behind the queue.
     border-collapse: collapse;
     padding: 16px;
     margin-right: 20px;
-
-
+    overflow: auto;
+    min-width: 400px;
 }
 
 .progressAlignment {
@@ -50,22 +50,16 @@ The logic behind the queue.
     margin-left: auto;
 }
 
-.arrowUp {
-    margin: 3px;
+.arrow {
     font-size: 26px;
     color: dodgerblue;
 }
-
-.arrowDown {
-    margin: 3px;
-    font-size: 26px;
-    color: dodgerblue;
-}
-
 .close {
-    margin: 3px;
+    border: none;
     font-size: 24px;
-    color: red;
+    color: white;
+    border-radius:60%;
+    background-color: red;
 }
 
 .batchProgress {

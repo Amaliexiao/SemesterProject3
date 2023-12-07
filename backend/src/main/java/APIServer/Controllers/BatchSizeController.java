@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/control")
 public class BatchSizeController {
@@ -16,8 +17,8 @@ public class BatchSizeController {
     OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
 
     @CrossOrigin
-    @GetMapping("/newBatchSize")
-    public void changeBatchSize(@RequestParam(name = "newValue") int newValue) throws Exception {
+    @PostMapping("/newBatchSize")
+    public void changeBatchSize(@RequestParam(name = "newValue") float newValue) throws Exception {
         NodeId sensorNodeId = NodeId.parse("ns=6;s=::Program:Cube.Command.Parameter[2].Value");
         Variant v = new Variant(newValue);
         DataValue dv = DataValue.valueOnly(v);
