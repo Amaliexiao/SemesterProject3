@@ -94,7 +94,7 @@ function updateBatchQueueTable(batchQueueData) {
         // Set cell content based on batch data
         cell1.innerHTML = `
  <div id="queue${index + 1}"> ${batch.beerId.name}:${batch.id} 
-        <progress id="beerProgress${index + 1}" value="32" max="100">32</progress>
+        <progress id="beerProgress${0}" value="0" max="100">32</progress>
         <ion-icon class="arrow" name="arrow-round-up"></ion-icon>
         <ion-icon class="arrow" name="arrow-round-down"></ion-icon>
         <button type="button" class="close" onclick="removeBatchFromQueue(${batch.id})">X</button>
@@ -124,6 +124,19 @@ function removeBatchFromQueue(id) {
         );
    updateBatchQueueTable(queueList);
 }
+
+setInterval(function progressBarQueue() {
+    const batchSizeId = document.getElementById('batchSize');
+    const batchSize = batchSizeId.value;
+
+    let totalProduced = getTotalProduced;
+
+    let totalProgress = totalProduced/batchSize*100;
+
+    document.getElementById(`beerProgress${0}`).value=totalProgress;
+
+
+}, 1000);
 
 
 

@@ -1,5 +1,7 @@
 const serverUrl = "http://localhost:8080";
 let state;
+let getTotalProduced;
+
 setInterval(function () {
   const apiEndpointBarley = serverUrl + "/fetch/barley";
   const elementNameBarley = "barley";
@@ -405,10 +407,10 @@ setInterval(function () {
       // console.log('API Response:', data);
 
       // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+      getTotalProduced = data.value; // Replace 'propertyName' with the actual property name in your JSON
       // console.log('Specific Value Total Products:', specificValue);
       // Display the API response on the HTML page
-      document.getElementById("totalProducts").textContent = specificValue;
+      document.getElementById("totalProducts").textContent = getTotalProduced;
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -450,41 +452,6 @@ setInterval(function () {
     });
   //code goes here that will be run every 5 seconds.
 }, 1000);
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const apiEndpoint = serverUrl + '/fetch/totalProducts';
-//
-//     // Function to make API call and return the parsed JSON
-//         fetch(apiEndpoint)
-//             .then(response => {
-//                 // Check if the request was successful (status code 200)
-//                 if (!response.ok) {
-//                     throw new Error(`HTTP error! Status: ${response.status}`);
-//                 }
-//
-//                 // Parse the JSON in the response
-//                 return response.json();
-//             })
-//             .then(data => {
-//                 // Access and print the values from the JSON response
-//                 console.log('API Response:', data);
-//
-//                 // Example: Access a specific value from the JSON
-//                 const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-//                 console.log('Specific Value Total Products:', specificValue);
-//
-//                 const batchSize = "";
-//                 let remainingProducts = batchSize - specificValue;
-//                 // Display the API response on the HTML page
-//                 document.getElementById('totalProducts').textContent=remainingProducts;
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//                 // Display the error on the HTML page
-//                 document.getElementById('totalProducts').innerHTML = `Error: ${error.message}`;
-//             });
-//
-// });
 
 // Current State
 
@@ -601,3 +568,7 @@ setInterval(function () {
       ).innerHTML = `Error: ${error.message}`;
     });
 }, 1000);
+
+//Calculate remaining bar for each beer in queue
+
+
