@@ -424,7 +424,7 @@ setInterval(function () {
 
 //Remaining products
 setInterval(function () {
-  let getQueueBeerID = queueList[0].beerId.id;
+  let getQueueBeerID = queueList[0].id;
   const apiEndpoint =
     serverUrl + "/fetch/getRemainingProducts?batchId=" + getQueueBeerID;
 
