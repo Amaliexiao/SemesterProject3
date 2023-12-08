@@ -2,14 +2,9 @@ package APIServer.Controllers;
 
 import APIServer.Entities.*;
 import jakarta.persistence.EntityNotFoundException;
-import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -19,14 +14,20 @@ public class BatchesController {
     private BatchRepo batchRepo;
     private BeerRepository beerRepository;
     private UserRepo userRepo;
+    private TemperatureRepo tempRepo;
+    private HumidityRepo humRepo;
+    private VibrationRepo vibRepo;
     CompletedBatches completedBatches = new CompletedBatches();
 
     private CompletedBatchRepo completedBatchRepo;
     @Autowired
-    public BatchesController(BeerRepository beerRepository, BatchRepo queuedBatchRepo, UserRepo userRepo, CompletedBatchRepo completedBatchRepo) {
+    public BatchesController(BeerRepository beerRepository, BatchRepo queuedBatchRepo, UserRepo userRepo, CompletedBatchRepo completedBatchRepo, TemperatureRepo tempRepo, HumidityRepo humRepo, VibrationRepo vibRepo) {
         this.userRepo = userRepo;
         this.batchRepo = queuedBatchRepo;
         this.beerRepository = beerRepository;
+        this.tempRepo = tempRepo;
+        this.humRepo = humRepo;
+        this.vibRepo = vibRepo;
         this.completedBatchRepo = completedBatchRepo;
     }
 
@@ -68,8 +69,17 @@ public class BatchesController {
         completedBatchRepo.save(completedBatches1);
         return "This api works" + successfulBeers;
     }
+
     @CrossOrigin
-    @PostMapping("removeBatch")
+    @PostMapping("/saveTemperature")
+    public void saveMeasurements(@RequestParam(name = "batchid") Long batchId, @RequestParam(name = "temperature") int temp/*, @RequestParam(name = "humidity") int hum, @RequestParam(name = "vibration") int vib*/){
+        Temperatures temperature = new Temperatures();
+        temperature.setBatchId(batchId);
+        temperature.setTemp(temp);
+        this.tempRepo.save(temperature);
+    }
+    @CrossOrigin
+    @PostMapping("/removeBatch")
     public void removeBatch(@RequestParam(name = "batchId") Long batchId) {
         batchRepo.deleteById(batchId);
     }

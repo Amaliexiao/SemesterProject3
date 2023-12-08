@@ -191,13 +191,20 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("temperature").textContent = specificValue;
+      fetch(serverUrl + "/queue/saveTemperature?batchId=" + getCurrentBatchId() + "&temperature=" + specificValue);
     })
     .catch((error) => {
       console.error("Error:", error);
       // Display the error on the HTML page
       document.getElementById("result").innerHTML = `Error: ${error.message}`;
     });
+
 }, 1000);
+
+
+function getCurrentBatchId() {
+  return fetch(serverUrl + "/fetch/batchIDValue");
+}
 
 // Humidity Sensor
 

@@ -14,9 +14,9 @@ public class BatchID extends OPCUANode {
 
     @CrossOrigin
     @GetMapping("/batchIDValue")
-    public Variant getBatchIDValue() {
+    public int getBatchIDValue() {
         Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[0].Value");
-        return sensorValue;
+        return (int) sensorValue.getValue();
     }
 }
 

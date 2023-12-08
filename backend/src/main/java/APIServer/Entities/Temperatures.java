@@ -9,9 +9,7 @@ public class Temperatures {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "batchId")
-    private Batches batch;
+    private Long batchId;
 
     private int temp;
 
@@ -23,12 +21,12 @@ public class Temperatures {
         this.id = id;
     }
 
-    public Batches getBatchId() {
-        return batch;
+    public Long getBatchId() {
+        return batchId;
     }
 
-    public void setBatchId(Batches id) {
-        this.batch = batch;
+    public void setBatchId(Long batchId) {
+        this.batchId = batchId;
     }
 
     public int getTemp() {
