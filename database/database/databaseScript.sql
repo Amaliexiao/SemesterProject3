@@ -33,7 +33,7 @@ CREATE TABLE completed_batches
 
 CREATE TABLE Temperature(
     id SERIAL PRIMARY KEY,
-    batchId INTEGER REFERENCES completed_batches (id),
+    batch_id INTEGER REFERENCES completed_batches (id),
     Temperature float NOT NULL
 );
 

@@ -3,7 +3,7 @@ package APIServer.Entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Temperatures {
+public class Temperature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,7 +11,7 @@ public class Temperatures {
 
     private Long batchId;
 
-    private int temp;
+    private int temperature;
 
     public int getId() {
         return id;
@@ -30,10 +30,10 @@ public class Temperatures {
     }
 
     public int getTemp() {
-        return temp;
+        return temperature;
     }
 
     public void setTemp(int temp) {
-        this.temp = temp;
+        this.temperature = temp;
     }
 }

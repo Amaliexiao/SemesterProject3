@@ -191,7 +191,7 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("temperature").textContent = specificValue;
-      fetch(serverUrl + "/queue/saveTemperature?batchId=" + getCurrentBatchId() + "&temperature=" + specificValue);
+      fetch(serverUrl + "/queue/saveTemperature?batchid=" + queueList[0].id + "&temperature=" + specificValue);
     })
     .catch((error) => {
       console.error("Error:", error);
