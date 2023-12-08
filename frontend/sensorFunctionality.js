@@ -274,7 +274,7 @@ setInterval(function () {
 // Batch ID
 
 setInterval(function () {
-  document.getElementById("batchID").textContent = queueList[0].beerId.id;
+  document.getElementById("batchID").textContent = queueList[0].id;
 }, 1000);
 
 // Products/min
