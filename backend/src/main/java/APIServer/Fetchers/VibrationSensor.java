@@ -14,8 +14,8 @@ public class VibrationSensor extends OPCUANode {
     @CrossOrigin
     @GetMapping("/vibrationValue")
     public Variant getVibrationValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value");
-        return sensorValue;
+        Variant vibrationValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[4].Value");
+        return vibrationValue;
     }
 }
 

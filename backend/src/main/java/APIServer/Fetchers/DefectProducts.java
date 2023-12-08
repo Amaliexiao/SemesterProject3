@@ -13,8 +13,8 @@ public class DefectProducts extends OPCUANode {
     @CrossOrigin
     @GetMapping("/defectProductsValue")
     public Variant getDefectProductsValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Admin.ProdDefectiveCount");
-        return sensorValue;
+        Variant defectProductsValue = getNodeValue("ns=6;s=::Program:Cube.Admin.ProdDefectiveCount");
+        return defectProductsValue;
     }
 }
 

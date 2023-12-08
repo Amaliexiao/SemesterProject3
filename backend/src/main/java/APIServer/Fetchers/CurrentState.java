@@ -14,8 +14,8 @@ public class CurrentState extends OPCUANode {
     @CrossOrigin
     @GetMapping("/currentStateValue")
     public Variant getCurrentStateValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.StateCurrent");
-        return sensorValue;
+        Variant currentStateValue = getNodeValue("ns=6;s=::Program:Cube.Status.StateCurrent");
+        return currentStateValue;
     }
 }
 

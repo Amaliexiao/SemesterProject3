@@ -85,4 +85,12 @@ public class CompletedBatches {
         this.userId = user;
     }
 
+    public Integer getSuccessfulBeers(){
+        return succesfulBeers;
+    }
+
+    public void setSuccesfulBeers(Integer succesfulBeers){
+        this.succesfulBeers = succesfulBeers;
+    }
+
 }

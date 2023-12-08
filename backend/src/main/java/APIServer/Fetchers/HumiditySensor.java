@@ -13,8 +13,8 @@ public class HumiditySensor extends OPCUANode {
     @CrossOrigin
     @GetMapping("/humidityValue")
     public Variant getHumidityValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[2].Value");
-        return sensorValue;
+        Variant humidityValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[2].Value");
+        return humidityValue;
     }
 }
 

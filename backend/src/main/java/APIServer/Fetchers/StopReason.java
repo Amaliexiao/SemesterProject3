@@ -14,8 +14,8 @@ public class StopReason extends OPCUANode {
     @CrossOrigin
     @GetMapping("/stopReasonValue")
     public Variant getStopReasonValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Admin.StopReason.Value");
-        return sensorValue;
+        Variant stopReason = getNodeValue("ns=6;s=::Program:Cube.Admin.StopReason.Value");
+        return stopReason;
     }
 }
 

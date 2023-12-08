@@ -14,8 +14,8 @@ public class TemperatureSensor extends OPCUANode {
     @CrossOrigin
     @GetMapping("/temperatureValue")
     public Variant getTemperatureValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[3].Value");
+        Variant temperatureValue = getNodeValue("ns=6;s=::Program:Cube.Status.Parameter[3].Value");
 
-        return sensorValue;
+        return temperatureValue;
     }
 }

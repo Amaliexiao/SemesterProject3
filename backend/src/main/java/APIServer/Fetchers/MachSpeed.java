@@ -15,9 +15,9 @@ public class MachSpeed extends OPCUANode {
     @CrossOrigin
     @GetMapping("/MachSpeedValue")
     public Variant getCurMachSpeedValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Status.MachSpeed");
+        Variant machineSpeedValue = getNodeValue("ns=6;s=::Program:Cube.Status.MachSpeed");
 
-        return sensorValue;
+        return machineSpeedValue;
     }
 }
 

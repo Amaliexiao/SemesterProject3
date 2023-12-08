@@ -14,8 +14,8 @@ public class CurrentProduct extends OPCUANode {
     @CrossOrigin
     @GetMapping("/currentProductValue")
     public Variant getCurrentProductValue() {
-        Variant sensorValue = getNodeValue("ns=6;s=::Program:Cube.Admin.Parameter[0].Value");
-        return sensorValue;
+        Variant currentProductValue = getNodeValue("ns=6;s=::Program:Cube.Admin.Parameter[0].Value");
+        return currentProductValue;
     }
 }
 
