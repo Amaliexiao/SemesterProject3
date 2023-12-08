@@ -1,36 +1,39 @@
 package APIServer.Fetchers;
 
+import APIServer.Entities.BatchRepo;
+import APIServer.Entities.Batches;
+import APIServer.OPCUANode;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;
-import org.example.OpcUaConfig;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.eclipse.milo.opcua.stack.core.types.builtin.unsigned.UShort;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/fetch")
-public class RemainingProducts {
+public class RemainingProducts extends OPCUANode {
 
-    ApplicationContext context = new AnnotationConfigApplicationContext(OpcUaConfig.class);
-    OpcUaConfig opcUaConfig = context.getBean(OpcUaConfig.class);
-
+    private BatchRepo batchRepo;
+    @Autowired
+    public RemainingProducts(BatchRepo batchRepo){
+        this.batchRepo = batchRepo;
+    }
     public Variant getTotalProductsValue(){
-        Variant totalProductsValue = opcUaConfig.getNodeValue("ns=6;s=::Program:product.produced");
+        Variant totalProductsValue = getNodeValue("ns=6;s=::Program:product.produced");
         return totalProductsValue;
     }
 
-//    public Variant getBatchSize() {
-////        Variant d = null;
-////        return d;
-//    }
-//
-//    @CrossOrigin
-//    @GetMapping("/totalProducts")
-//    public Variant getRemainingProducts() {
-//
-////        return
-//    }
-
-}
+    @CrossOrigin
+    @GetMapping("/getRemainingProducts")
+    public int getBatchSize(@RequestParam(name ="batchId") Long batchId) {
+        Batches batch = this.batchRepo.findById(batchId).orElse(null);
+        if (batch != null) {
+            int batchSize = batch.getSize();
+            UShort totalProductsValue = (UShort) getTotalProductsValue().getValue();
+            int remainingProducts =  batchSize - totalProductsValue.intValue();
+            return remainingProducts;
+        } else {
+            return -1;
+        }
+}}
