@@ -83,13 +83,13 @@ function optimalSpeed(beerType){
             speed = 86;
             break;
         case 3:
-            speed = 0;
+            speed = 10;
             break;
         case 4:
-            speed = 0;
+            speed = 10;
             break;
         case 5:
-            speed = 0;
+            speed = 10;
             break;
     }
     return speed;
