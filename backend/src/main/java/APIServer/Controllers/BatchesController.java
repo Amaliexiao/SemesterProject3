@@ -72,13 +72,34 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/saveTemperature")
-    public int saveMeasurements(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "temperature") int temp/*, @RequestParam(name = "humidity") int hum, @RequestParam(name = "vibration") int vib*/){
+    public int saveTemperatures(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "temperature") int temp){
         Temperature temperature = new Temperature();
         temperature.setBatchId((long) batchId);
         temperature.setTemp(temp);
         this.tempRepo.save(temperature);
         return batchId;
     }
+
+    @CrossOrigin
+    @GetMapping("/saveVibration")
+    public int saveVibrations(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "vibration") int vib){
+        Vibration vibration = new Vibration();
+        vibration.setBatchId((long) batchId);
+        vibration.setVib(vib);
+        this.vibRepo.save(vibration);
+        return batchId;
+    }
+
+    @CrossOrigin
+    @GetMapping("/saveHumidity")
+    public int saveHumidity(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "humidity") int hum){
+        Humidity humidity = new Humidity();
+        humidity.setBatchId((long) batchId);
+        humidity.setHum(hum);
+        this.humRepo.save(humidity);
+        return batchId;
+    }
+
     @CrossOrigin
     @PostMapping("/removeBatch")
     public void removeBatch(@RequestParam(name = "batchId") Long batchId) {

@@ -233,6 +233,7 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("humidity").textContent = specificValue;
+      fetch(serverUrl + "/queue/saveHumidity?batchid=" + queueList[0].id + "&humidity=" + specificValue);
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -268,6 +269,7 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("vibration").textContent = specificValue;
+      fetch(serverUrl + "/queue/saveVibration?batchid=" + queueList[0].id + "&vibration=" + specificValue);
     })
     .catch((error) => {
       console.error("Error:", error);

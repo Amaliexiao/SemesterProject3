@@ -3,7 +3,7 @@ package APIServer.Entities;
 import jakarta.persistence.*;
 
 @Entity
-public class Humidities {
+public class Vibration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,7 +11,7 @@ public class Humidities {
 
     private Long batchId;
 
-    private int humidity;
+    private int vibration;
 
     public int getId() {
         return id;
@@ -29,12 +29,11 @@ public class Humidities {
         this.batchId = batchId;
     }
 
-    public int getHum() {
-        return humidity;
+    public int getVib() {
+        return vibration;
     }
 
-    public void setHum(int humidity) {
-        this.humidity = humidity;
+    public void setVib(int vibration) {
+        this.vibration = vibration;
     }
 }
-
