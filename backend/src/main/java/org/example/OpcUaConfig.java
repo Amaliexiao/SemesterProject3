@@ -74,17 +74,4 @@ public class OpcUaConfig {
     }
 
 
-    public Variant getNodeValue(String nodeID) {
-        NodeId sensorNodeId = NodeId.parse(nodeID);
-        Variant sensorValue = null;
-        try {
-            DataValue sensorData = this.getOpcUaConfig().readValue(0, TimestampsToReturn.Both, sensorNodeId).get();
-            sensorValue = sensorData.getValue();
-        }
-        catch (ExecutionException | InterruptedException e) {
-            System.out.println(e);
-        }
-        return sensorValue;
-    }
-
 }
