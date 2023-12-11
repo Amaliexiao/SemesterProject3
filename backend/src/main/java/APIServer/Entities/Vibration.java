@@ -11,7 +11,7 @@ public class Vibration {
 
     private Long batchId;
 
-    private int vibration;
+    private float vibration;
 
     public int getId() {
         return id;
@@ -29,7 +29,7 @@ public class Vibration {
         this.batchId = batchId;
     }
 
-    public int getVib() {
+    public float getVib() {
         return vibration;
     }
 

@@ -11,7 +11,7 @@ public class Humidity {
 
     private Long batchId;
 
-    private int humidity;
+    private float humidity;
 
     public int getId() {
         return id;
@@ -29,7 +29,7 @@ public class Humidity {
         this.batchId = batchId;
     }
 
-    public int getHum() {
+    public float getHum() {
         return humidity;
     }
 

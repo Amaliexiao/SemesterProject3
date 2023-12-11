@@ -11,7 +11,7 @@ public class Temperature {
 
     private Long batchId;
 
-    private int temperature;
+    private float temperature;
 
     public int getId() {
         return id;
@@ -29,7 +29,7 @@ public class Temperature {
         this.batchId = batchId;
     }
 
-    public int getTemp() {
+    public float getTemp() {
         return temperature;
     }
 

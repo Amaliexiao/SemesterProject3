@@ -3,6 +3,10 @@ function showBatchPopup() {
     popup.classList.toggle("show");
 }
 
+function testBachReportFunctionality(id) {
+    fetch(serverUrl + "/reports/createBatchReport?batchId=" + id);
+}
+
 let url = "http://localhost:8080/queue"
 
 var slider = document.getElementById("speedSlider");
