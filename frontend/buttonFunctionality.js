@@ -40,9 +40,11 @@ function sendSpeedParameter(speed) {
 }
 
 function sendBeerIdParameter(beerId) {
-  let url = serverUrl + "/control";
-  fetch(url + "/newProductID?newValue=" + beerId, {
-    method: "POST",
+
+    let beertype = beerId-1;
+    let url = serverUrl + '/control';
+    fetch(url + "/newProductID?newValue=" + beertype, {
+        method: "POST"
   })
     .then((resp) => {
       if (resp.status === 200) {

@@ -33,11 +33,14 @@
                  <option value="5">Alc Free</option>
     </select>
         <h3>Choose size for this batch</h3>
-            <input id="batchSize" TYPE="NUMBER" MIN="1" MAX="65535" STEP="1" VALUE="100" SIZE="6">
+            <input id="batchSize" TYPE="NUMBER" MIN="1" MAX="1200" STEP="1" VALUE="100" SIZE="6">
         <h3>Choose speed for production</h3>
+             <label for="optimalSpeed">Use optimal speed:</label>
+            <input type="checkbox" id="optimalSpeed">
+            <p>Manually choose speed</p>
             <input id="speedSlider" type="range" class="slider" min="0" max="100" value="20">
              <p>Value: <span id="sliderValue"></span> %</p>
-        <input id="submitBatch" type="submit"> </input>
+        <input id="submitBatch" type="submit">
     </form>
     </span>
 </div>
@@ -174,7 +177,7 @@
             </div>
             <div class="sensorValue">
                 <b id="batchID">
-                    04
+                    0
                 </b>
             </div>
         </div>
@@ -276,7 +279,7 @@
         <h2 class="stateLabel">Current State</h2>
         <div class="currentStateDisplay" id="currentStateDisplay">
             <div class="stateColor" id="stateColor"></div>
-            <div class ="stateContent">
+            <div class="stateContent">
                 <p class="stateNumber" id="stateNumber">4</p>
                 <p> - </p>
                 <p class="stateText" id="stateText">Stopped</p>
