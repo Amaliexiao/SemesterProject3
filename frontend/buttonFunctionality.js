@@ -113,6 +113,7 @@ async function processQueue() {
 
         // If the state becomes 17, remove the batch and reset
         if (state === 17) {
+          finishBatch(serverUrl);
           removeBatchFromQueue(queueList[0].id);
           await new Promise((resolve) => setTimeout(resolve, 2000));
           await fetchBatchQueue();
@@ -137,6 +138,17 @@ async function processQueue() {
   }
 }
 
+function finishBatch(apiEndpoint){
+  fetch(
+    serverUrl +
+      "/queue" +
+      "/finishBatch?id="+queueList[0].id +"&"+"successfulBeers=" + successfulBeers+"&failedBeers=" +
+      failedBeers,
+    {
+      method: "GET",
+    }
+  )
+}
 document.getElementById("stopButton").onclick = function () {
   let url = serverUrl + "/control";
 

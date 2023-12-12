@@ -2,6 +2,7 @@ package APIServer.Entities;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
@@ -28,7 +29,7 @@ public class CompletedBatches {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name ="startTime", nullable = false, updatable = false)
     private Date startTime;
-    @CreationTimestamp
+    @UpdateTimestamp
     @Column(name ="stopTime", nullable = false, updatable = false)
     private Date stopTime;
 
@@ -91,6 +92,14 @@ public class CompletedBatches {
 
     public void setSuccesfulBeers(Integer succesfulBeers){
         this.succesfulBeers = succesfulBeers;
+    }
+
+    public Integer getFailedBeers(){
+        return failedBeers;
+    }
+
+    public void setFailedBeersBeers(Integer failedBeers){
+        this.failedBeers = failedBeers;
     }
 
 }

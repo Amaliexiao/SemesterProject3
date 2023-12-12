@@ -2,14 +2,9 @@ package APIServer.Controllers;
 
 import APIServer.Entities.*;
 import jakarta.persistence.EntityNotFoundException;
-import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -19,14 +14,20 @@ public class BatchesController {
     private BatchRepo batchRepo;
     private BeerRepository beerRepository;
     private UserRepo userRepo;
+    private TemperatureRepo tempRepo;
+    private HumidityRepo humRepo;
+    private VibrationRepo vibRepo;
     CompletedBatches completedBatches = new CompletedBatches();
 
     private CompletedBatchRepo completedBatchRepo;
     @Autowired
-    public BatchesController(BeerRepository beerRepository, BatchRepo queuedBatchRepo, UserRepo userRepo, CompletedBatchRepo completedBatchRepo) {
+    public BatchesController(BeerRepository beerRepository, BatchRepo queuedBatchRepo, UserRepo userRepo, CompletedBatchRepo completedBatchRepo, TemperatureRepo tempRepo, HumidityRepo humRepo, VibrationRepo vibRepo) {
         this.userRepo = userRepo;
         this.batchRepo = queuedBatchRepo;
         this.beerRepository = beerRepository;
+        this.tempRepo = tempRepo;
+        this.humRepo = humRepo;
+        this.vibRepo = vibRepo;
         this.completedBatchRepo = completedBatchRepo;
     }
 
@@ -61,15 +62,47 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/finishBatch")
-    public String finishBatch(@RequestParam(name = "successfulBeers") Integer successfulBeers){
+    public String finishBatch(@RequestParam(name ="id") Long id,@RequestParam(name = "successfulBeers") Integer successfulBeers, @RequestParam(name="failedBeers") Integer failedBeers){
         System.out.println("Successful beers:" + successfulBeers);
-        CompletedBatches completedBatches1 = completedBatchRepo.findById(2L).get();
+        CompletedBatches completedBatches1 = completedBatchRepo.findById(id).get();
         completedBatches1.setSuccesfulBeers(successfulBeers);
+        completedBatches1.setFailedBeersBeers(failedBeers);
         completedBatchRepo.save(completedBatches1);
         return "This api works" + successfulBeers;
     }
+
     @CrossOrigin
-    @PostMapping("removeBatch")
+    @GetMapping("/saveTemperature")
+    public int saveTemperatures(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "temperature") float temp){
+        Temperature temperature = new Temperature();
+        temperature.setBatchId((long) batchId);
+        temperature.setTemp(temp);
+        this.tempRepo.save(temperature);
+        return batchId;
+    }
+
+    @CrossOrigin
+    @GetMapping("/saveVibration")
+    public int saveVibrations(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "vibration") float vib){
+        Vibration vibration = new Vibration();
+        vibration.setBatchId((long) batchId);
+        vibration.setVib(vib);
+        this.vibRepo.save(vibration);
+        return batchId;
+    }
+
+    @CrossOrigin
+    @GetMapping("/saveHumidity")
+    public int saveHumidity(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "humidity") float hum){
+        Humidity humidity = new Humidity();
+        humidity.setBatchId((long) batchId);
+        humidity.setHum(hum);
+        this.humRepo.save(humidity);
+        return batchId;
+    }
+
+    @CrossOrigin
+    @PostMapping("/removeBatch")
     public void removeBatch(@RequestParam(name = "batchId") Long batchId) {
         batchRepo.deleteById(batchId);
     }
