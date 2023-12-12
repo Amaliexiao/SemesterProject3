@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -69,19 +68,19 @@ public class BatchReport {
                 pw.flush();
             }
 
-            List<Temperature> tempTemps =  tempRepo.findAllById(Collections.singleton(batchId));
+            List<Temperature> tempTemps =  tempRepo.findByBatchId(batchId);
             List<Float> temperatures = new ArrayList<>();
             for (int i = 0; i < tempTemps.size(); i++) {
                 temperatures.add(tempTemps.get(i).getTemp());
             }
 
-            List<Humidity> tempHums =  humRepo.findAllById(Collections.singleton(batchId));
+            List<Humidity> tempHums =humRepo.findByBatchId(batchId);
             List<Float> humidities = new ArrayList<>();
             for (int i = 0; i < tempHums.size(); i++) {
                 humidities.add(tempHums.get(i).getHum());
             }
 
-            List<Vibration> tempVibs =  vibRepo.findAllById(Collections.singleton(batchId));
+            List<Vibration> tempVibs =  vibRepo.findByBatchId(batchId);
             List<Float> vibrations = new ArrayList<>();
             for (int i = 0; i < tempVibs.size(); i++) {
                 vibrations.add(tempVibs.get(i).getVib());
