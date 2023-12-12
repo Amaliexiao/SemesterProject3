@@ -33,7 +33,7 @@ public class Temperature {
         return temperature;
     }
 
-    public void setTemp(int temp) {
+    public void setTemp(float temp) {
         this.temperature = temp;
     }
 }

@@ -33,7 +33,7 @@ public class Humidity {
         return humidity;
     }
 
-    public void setHum(int humidity) {
+    public void setHum(float humidity) {
         this.humidity = humidity;
     }
 }

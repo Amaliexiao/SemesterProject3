@@ -33,7 +33,7 @@ public class Vibration {
         return vibration;
     }
 
-    public void setVib(int vibration) {
+    public void setVib(float vibration) {
         this.vibration = vibration;
     }
 }

@@ -1,5 +1,7 @@
 const serverUrl = "http://localhost:8080";
 let state;
+let successfulBeers;
+let failedBeers;
 setInterval(function () {
   const apiEndpointBarley = serverUrl + "/fetch/barley";
   const elementNameBarley = "barley";
@@ -191,7 +193,9 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("temperature").textContent = specificValue;
+      if(state === 6 ){
       fetch(serverUrl + "/queue/saveTemperature?batchid=" + queueList[0].id + "&temperature=" + specificValue);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -233,7 +237,9 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("humidity").textContent = specificValue;
+      if(state === 6 ){
       fetch(serverUrl + "/queue/saveHumidity?batchid=" + queueList[0].id + "&humidity=" + specificValue);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -269,7 +275,9 @@ setInterval(function () {
 
       // Display the API response on the HTML page
       document.getElementById("vibration").textContent = specificValue;
+      if(state === 6 ){
       fetch(serverUrl + "/queue/saveVibration?batchid=" + queueList[0].id + "&vibration=" + specificValue);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -370,11 +378,11 @@ setInterval(function () {
       // console.log('API Response:', data);
 
       // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+      successfulBeers = data.value; // Replace 'propertyName' with the actual property name in your JSON
       // console.log('Specific Value:', specificValue);
 
       // Display the API response on the HTML page
-      document.getElementById("acceptableProducts").textContent = specificValue;
+      document.getElementById("acceptableProducts").textContent = successfulBeers;
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -407,11 +415,11 @@ setInterval(function () {
       // console.log('API Response:', data);
 
       // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
+      failedBeers = data.value; // Replace 'propertyName' with the actual property name in your JSON
       // console.log('Specific Value:', specificValue);
 
       // Display the API response on the HTML page
-      document.getElementById("defectProducts").textContent = specificValue;
+      document.getElementById("defectProducts").textContent = failedBeers;
     })
     .catch((error) => {
       console.error("Error:", error);

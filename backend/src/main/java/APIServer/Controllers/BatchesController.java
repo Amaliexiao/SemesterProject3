@@ -62,17 +62,18 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/finishBatch")
-    public String finishBatch(@RequestParam(name = "successfulBeers") Integer successfulBeers){
+    public String finishBatch(@RequestParam(name ="id") Long id,@RequestParam(name = "successfulBeers") Integer successfulBeers, @RequestParam(name="failedBeers") Integer failedBeers){
         System.out.println("Successful beers:" + successfulBeers);
-        CompletedBatches completedBatches1 = completedBatchRepo.findById(2L).get();
+        CompletedBatches completedBatches1 = completedBatchRepo.findById(id).get();
         completedBatches1.setSuccesfulBeers(successfulBeers);
+        completedBatches1.setFailedBeersBeers(failedBeers);
         completedBatchRepo.save(completedBatches1);
         return "This api works" + successfulBeers;
     }
 
     @CrossOrigin
     @GetMapping("/saveTemperature")
-    public int saveTemperatures(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "temperature") int temp){
+    public int saveTemperatures(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "temperature") float temp){
         Temperature temperature = new Temperature();
         temperature.setBatchId((long) batchId);
         temperature.setTemp(temp);
@@ -82,7 +83,7 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/saveVibration")
-    public int saveVibrations(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "vibration") int vib){
+    public int saveVibrations(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "vibration") float vib){
         Vibration vibration = new Vibration();
         vibration.setBatchId((long) batchId);
         vibration.setVib(vib);
@@ -92,7 +93,7 @@ public class BatchesController {
 
     @CrossOrigin
     @GetMapping("/saveHumidity")
-    public int saveHumidity(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "humidity") int hum){
+    public int saveHumidity(@RequestParam(name = "batchid") int batchId , @RequestParam(name = "humidity") float hum){
         Humidity humidity = new Humidity();
         humidity.setBatchId((long) batchId);
         humidity.setHum(hum);
