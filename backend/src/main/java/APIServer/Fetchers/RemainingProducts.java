@@ -34,6 +34,6 @@ public class RemainingProducts extends OPCUANode {
             int remainingProducts =  batchSize - totalProductsValue.intValue();
             return remainingProducts;
         } else {
-            return -1;
+            return 0;
         }
 }}
