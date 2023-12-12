@@ -57,7 +57,7 @@ public class BatchReport {
     }
 
     @CrossOrigin
-    @PostMapping("/createBatchReport")
+    @GetMapping("/createBatchReport")
     public void createBatchReport(@RequestParam(name = "batchId") long batchId) {
         File file = new File("batchreport" + batchId +".csv");
         boolean exists = file.exists();
