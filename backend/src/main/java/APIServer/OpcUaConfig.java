@@ -1,4 +1,4 @@
-package org.example;
+package APIServer;
 
 import org.eclipse.milo.opcua.sdk.client.OpcUaClient;
 import org.eclipse.milo.opcua.sdk.client.api.config.OpcUaClientConfig;
@@ -27,6 +27,7 @@ public class OpcUaConfig {
         OpcUaClient opcUaClient = createAndConfigureOpcUaClient();
         return opcUaClient;
     }
+    //initialize hostname and port
     String hostname;
     int port;
 
@@ -35,17 +36,14 @@ public class OpcUaConfig {
         //Create and configure te OpcUaClient
         OpcUaClient client = null;
         try {
-            this.hostname = "localhost"; // If you are running on the machine the hostname should be:"192.168.0.122"
-                                            // If you are running on simulation the hostname should be: "localhost"
+            // If you are running on the machine the hostname should be:"192.168.0.122"
+            // If you are running on simulation the hostname should be: "localhost"
+            this.hostname = "localhost";
             this.port = 4840;
             List<EndpointDescription> endpoints = DiscoveryClient.getEndpoints(
-                            "opc.tcp://" + hostname + ":" + port + "/milo")
-                    .get();
-
-// Choose an endpoint (you might want to add some logic to select the appropriate one)
+                            "opc.tcp://" + hostname + ":" + port + "/milo").get();
 
             OpcUaClientConfigBuilder cfg = new OpcUaClientConfigBuilder();
-
             for (EndpointDescription endpoint : endpoints) {
                 if (endpoint.getSecurityMode().name().equals("None")) {
                     EndpointDescription configPoint = EndpointUtil.updateUrl(endpoint, hostname, port);
@@ -53,25 +51,17 @@ public class OpcUaConfig {
                     break;
                 }
             }
-
-
-// Create a session
             client = OpcUaClient.create(cfg.build());
             client.connect().get();
-
         } catch (UaException u) {
             System.out.println(u.getMessage());
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-        // Add more configuration?
-
         return client;
     }
 
     public OpcUaClient getOpcUaConfig(){
         return opcUaClient();
     }
-
-
 }

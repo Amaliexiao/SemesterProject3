@@ -1,4 +1,4 @@
-package org.example;
+package APIServer;
 
 import APIServer.Entities.*;
 import org.springframework.beans.factory.annotation.Autowired;

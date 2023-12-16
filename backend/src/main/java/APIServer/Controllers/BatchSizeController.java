@@ -1,6 +1,6 @@
 package APIServer.Controllers;
 
-import org.example.OpcUaConfig;
+import APIServer.OpcUaConfig;
 import org.eclipse.milo.opcua.stack.core.types.builtin.DataValue;
 import org.eclipse.milo.opcua.stack.core.types.builtin.NodeId;
 import org.eclipse.milo.opcua.stack.core.types.builtin.Variant;

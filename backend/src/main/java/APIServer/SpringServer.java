@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import java.util.Objects;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"APIServer.Fetchers", "org.example", "APIServer.Controllers","APIServer.Entities"})
+@ComponentScan(basePackages = {"APIServer.Fetchers", "APIServer.Controllers","APIServer.Entities"})
 public class SpringServer implements CommandLineRunner {
     @Autowired
     private BeerRepository beerRepo;

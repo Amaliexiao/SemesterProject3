@@ -3,60 +3,37 @@ document.getElementById("startButton").onclick = function () {
   processQueue();
 };
 
-function sendSizeParameter(size) {
-  let url = serverUrl + "/control";
-  fetch(url + "/newBatchSize?newValue=" + size, {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
+function APIPost(APIEndpoint) {
+    fetch(APIEndpoint,{
+        method: "POST",
     })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+        .then((resp) => {
+            if (resp.status === 200) {
+                return resp.json;
+            } else {
+                throw new Error(resp.toString());
+            }
+        })
+        .then((data) => console.log(data))
+        .catch((error) => {
+            console.error("Error:", error);
+        });
+}
+
+function sendSizeParameter(size) {
+  let url = serverUrl + "/control/newBatchSize?newValue=" + size;
+  APIPost(url);
 }
 
 function sendSpeedParameter(speed) {
-  let url = serverUrl + "/control";
-  fetch(url + "/newMachSpeed?newValue=" + speed, {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  let url = serverUrl + "/control/newMachSpeed?newValue=" + speed;
+  APIPost(url);
 }
 
 function sendBeerIdParameter(beerId) {
-
-    let beertype = beerId-1;
-    let url = serverUrl + '/control';
-    fetch(url + "/newProductID?newValue=" + beertype, {
-        method: "POST"
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    let beerType = beerId-1;
+    let url = serverUrl + '/control/newProductID?newValue=' + beerType;
+    APIPost(url);
 }
 
 async function processQueue() {
@@ -64,61 +41,41 @@ async function processQueue() {
 
   async function startProcessing() {
     try {
-      // Check if there are items in the queue
+      // check if there are items in the queue
       if (queueList.length >= 1) {
-        // Check if the state is 4
+        // check if the state is 4
         while (state === 4) {
           console.log("starting");
           sendSizeParameter(queueList[0].size);
           sendBeerIdParameter(queueList[0].beerId.id);
           sendSpeedParameter(queueList[0].speed);
-          fetch(
-            serverUrl +
+          APIPost(serverUrl +
               "/queue" +
               "/addCompletedBatch?userID=1&size=" +
               queueList[0].size +
               "&beerType=" +
               queueList[0].beerId.id +
               "&speed=" +
-              queueList[0].speed,
-            {
-              method: "POST",
-            }
-          )
-            .then((resp) => {
-              if (resp.status === 200) {
-                return resp.json();
-              } else {
-                throw new Error(resp.toString());
-              }
-            })
-            .then((data) => console.log(data))
-            .catch((error) => {
-              console.error("Error:", error);
-            });
-
+              queueList[0].speed)
           // Perform the 'start' operation
-          const resp = await fetch(url + "/start", {
-            method: "POST",
-          });
-
+          const resp = await APIPost(url+"/start");
           if (resp.status === 200) {
             const data = await resp.json();
             console.log("Processed Data:", data);
-            await new Promise((resolve) => setTimeout(resolve, 2000)); // Add delay if needed
+            await new Promise((resolve) => setTimeout(resolve, 2000));
           } else {
             throw new Error(resp.statusText);
           }
         }
 
-        // If the state becomes 17, remove the batch and reset
+        // if the state becomes 17, remove the batch and reset
         if (state === 17) {
           finishBatch(serverUrl);
           removeBatchFromQueue(queueList[0].id);
           await new Promise((resolve) => setTimeout(resolve, 2000));
           await fetchBatchQueue();
           reset();
-          await new Promise((resolve) => setTimeout(resolve, 1000)); // Initial delay
+          await new Promise((resolve) => setTimeout(resolve, 1000));
           await startProcessing();
         }
       }
@@ -132,8 +89,8 @@ async function processQueue() {
   await startProcessing();
 
   if (state !== 17) {
-    // Introduce a delay before the next recursive call
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // Add delay if needed
+    // give a delay before the next recursive call
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Add more delay if needed
     await processQueue();
   }
 }
@@ -150,82 +107,25 @@ function finishBatch(apiEndpoint){
   )
 }
 document.getElementById("stopButton").onclick = function () {
-  let url = serverUrl + "/control";
-
-  fetch(url + "/stop", {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  let url = serverUrl + "/control/stop";
+  APIPost(url);
 };
 
 document.getElementById("resetButton").onclick = function () {
-  reset();
+    reset();
 };
 
 function reset() {
-  let url = serverUrl + "/control";
-
-  console.log("Resetting");
-  fetch(url + "/reset", {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+    let url = serverUrl + "/control/reset";
+    APIPost(url);
 }
 
 document.getElementById("clearButton").onclick = function () {
-  let url = serverUrl + "/control";
-
-  fetch(url + "/clear", {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  let url = serverUrl + "/control/clear";
+  APIPost(url);
 };
 
 document.getElementById("abortButton").onclick = function () {
-  let url = serverUrl + "/control";
-
-  fetch(url + "/abort", {
-    method: "POST",
-  })
-    .then((resp) => {
-      if (resp.status === 200) {
-        return resp.json;
-      } else {
-        throw new Error(resp.toString());
-      }
-    })
-    .then((data) => console.log(data))
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  let url = serverUrl + "/control/abort";
+    APIPost(url);
 };
