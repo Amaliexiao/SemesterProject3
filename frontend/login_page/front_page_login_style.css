@@ -14,7 +14,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    overflow: auto;
 }
 
 .logo {
@@ -29,6 +28,8 @@ body {
     padding: 15px 30px;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0px;
+    overflow: hidden;
 }
 
 .main-container {

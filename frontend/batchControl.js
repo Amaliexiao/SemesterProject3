@@ -1,5 +1,5 @@
 function showBatchPopup() {
-    var popup = document.getElementById("batchPopup");
+    let popup = document.getElementById("batchPopup");
     popup.classList.toggle("show");
 }
 
@@ -9,9 +9,9 @@ function testBachReportFunctionality(id) {
 
 let url = "http://localhost:8080/queue"
 let queueList;
-var checkBox = document.getElementById("optimalSpeed");
-var slider = document.getElementById("speedSlider");
-var output = document.getElementById("sliderValue");
+let checkBox = document.getElementById("optimalSpeed");
+let slider = document.getElementById("speedSlider");
+let output = document.getElementById("sliderValue");
 
 output.innerHTML = slider.value;
 
@@ -33,8 +33,8 @@ function checkSpeed() {
 
 document.getElementById("submitBatch").onclick =
     function () {
-        var dropdownMenu = document.getElementById("typeOfBeer");
-        var spinner = document.getElementById("batchSize");
+        let dropdownMenu = document.getElementById("typeOfBeer");
+        let spinner = document.getElementById("batchSize");
 
         let beerType = parseInt(dropdownMenu.value) + 1;
         let size = spinner.value;
@@ -100,50 +100,27 @@ function optimalSpeed(beerType){
 }
 
 function addBatch(speed, size, beerType) {
-    fetch(url + "/addBatch?userID=1&size=" + size + "&beerType=" + beerType + "&speed=" + speed, {
-        method: "POST"
-    })
-        .then(resp => {
-            if (resp.status === 200) {
-                return resp.json();
-            } else {
-                throw new Error(resp.toString())
-            }
-        })
-        .then(data =>
-            console.log(data))
-        .catch(error => {
-                console.error('Error:', error)
-            }
-        );
+    APIPost(url + "/addBatch?userID=1&size=" + size + "&beerType=" + beerType + "&speed=" + speed);
 }
 
-// Function to fetch batch queue data
+// fetch batch queue
 function fetchBatchQueue() {
-    fetch(url + "/getBatchQueue")
-        .then(response => {
-            return response.json();
-        })
-        .then(data => {
-            // Call a function to update the HTML with the fetched data
-            queueList = data;
-            updateBatchQueueTable();
-        })
-        .catch(error => console.error('Error fetching batch queue:', error));
+    APIFetcherNoneVariant(url + "/getBatchQueue").then((batchQueue) => {
+        console.log("batchqueue " + batchQueue)
+        queueList = batchQueue;
+        updateBatchQueueTable();
+    });
 }
 
-// Function to update the HTML table with batch queue data
 function updateBatchQueueTable() {
     const table = document.getElementById('batchQueueTable');
-    // Clear existing rows
+    // clear queue
     table.innerHTML = '<tr><th>Queue</th><th>Nr.</th></tr>';
-
-    // Loop through the batch queue data and append rows to the table
+    // loop through the queue and insert a div for each batch
     queueList.forEach((batch, index) => {
         const row = table.insertRow(index + 1);
         const cell1 = row.insertCell(0);
         const cell2 = row.insertCell(1);
-        // Set cell content based on batch data
         cell1.innerHTML = `
  <div id="queue${index + 1}"> ${batch.beerId.name}:${batch.id} 
         <progress id="beerProgress${0}" value="0" max="100">32</progress>
@@ -156,38 +133,17 @@ function updateBatchQueueTable() {
     });
 }
 
-function removeBatchFromQueue(id) {
-    let beerId = id;
-    fetch(url + "/removeBatch?batchId=" + beerId, {
-        method: "POST"
-    })
-        .then(resp => {
-            if (resp.status === 200) {
-                fetchBatchQueue();
-                return resp.json();
-            } else {
-                throw new Error(resp.toString())
-            }
-        })
-        .then(data =>
-            console.log(data))
-        .catch(error => {
-                console.error('Error:', error)
-            }
-        );
+async function removeBatchFromQueue(id) {
+    await APIPost(url + "/removeBatch?batchId=" + id);
+    fetchBatchQueue();
 }
 
 setInterval(function progressBarQueue() {
     const batchSizeId = document.getElementById('batchSize');
     const batchSize = batchSizeId.value;
-
     let totalProduced = getTotalProduced;
-
     let totalProgress = totalProduced/batchSize*100;
-
     document.getElementById(`beerProgress${0}`).value=totalProgress;
-
-
 }, 1000);
 
 

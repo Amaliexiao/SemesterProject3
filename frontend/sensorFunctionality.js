@@ -30,561 +30,285 @@ setInterval(function () {
   checkIfEmpty(apiEndpointYeast, elementNameYeast);
 }, 1000);
 
+setInterval(function() {
+  updateMaintenanceBar();
+  updateMaintenanceState();
+  updateTemperatureValue();
+  updateHumidityValue();
+  updateVibrationValue();
+  updateProductsMin();
+  updateBatchId();
+  updateAcceptableProducts();
+  updateDefectProducts();
+  updateTotalProducts();
+  updateRemainingProducts();
+  updateCurrentState();
+}, 1000);
+
+function APIFetcher(apiEndpoint) {
+  return fetch(apiEndpoint)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const apiValue = data.value;
+        return apiValue;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
+}
+
+function APIFetcherNoneVariant(apiEndpoint) {
+  return fetch(apiEndpoint)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        throw error;
+      });
+}
+
+function updateMaintenanceBar() {
+  const apiEndpoint = serverUrl + "/fetch/maintenanceCounter";
+  APIFetcher(apiEndpoint)
+      .then((maintenanceCounter) => {
+        let maintenanceBarValue = (maintenanceCounter / 30000) * 100;
+        document.getElementById("maintenance").style.width =
+            maintenanceBarValue + "%";
+      });
+}
+
 function setIngredientAmount(apiEndpoint, elementID) {
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      let Value = (specificValue / 35000) * 100;
-      // Display the API response on the HTML page
-      document
+  APIFetcher(apiEndpoint).then((ingredientValue) => {
+    let ingredientPercentage = (ingredientValue / 35000) * 100;
+    document
         .getElementById(elementID)
-        .setAttribute("style", "height:" + Value + "%");
-      console.log(elementID);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById(elementID).innerHTML = `Error: ${error.message}`;
-    });
+        .setAttribute("style", "height:" + ingredientPercentage + "%");
+  });
 }
 
 // Empty Inventory Alert
 function checkIfEmpty(apiEndpoint, elementName) {
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      console.log("API Response:", data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      console.log("Specific Value:", specificValue);
-
-      if (specificValue == 0) {
-        alert("Please refill " + elementName);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-    });
+  APIFetcher(apiEndpoint).then((inventoryValue) => {
+    if (inventoryValue == 0) {
+      alert("Please refill " + elementName);
+    }
+  });
 }
 
-// Maintenance
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-  const apiEndpoint = serverUrl + "/fetch/maintenanceCounter";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      let maintenanceValue = (specificValue / 30000) * 100;
-
-      // Display the API response on the HTML page
-      document.getElementById("maintenance").style.width =
-        maintenanceValue + "%";
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
-
 // Maintance Alert
-setInterval(function () {
+function updateMaintenanceState() {
   const apiEndpoint = serverUrl + "/fetch/maintenanceState";
 
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      console.log("API Response:", data);
-
-      // Example: Access a specific value from the JSON
-      const maintenanceState = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      console.log("Maintenece State", maintenanceState);
-
-      if (maintenanceState == 20) {
-        document.getElementById("customAlert").style.display = "block";
-      } else {
-        document.getElementById("customAlert").style.display = "none";
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
+  APIFetcher(apiEndpoint).then((maintenanceState) => {
+    console.log("Maintenance state " + maintenanceState);
+    if (maintenanceState == 20) {
+      document.getElementById("customAlert").style.display = "block";
+    } else {
+      document.getElementById("customAlert").style.display = "none";
+    }
+  });
+}
 
 // Temperature Sensor
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+function updateTemperatureValue() {
   const apiEndpoint = serverUrl + "/fetch/temperatureValue";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("temperature").textContent = specificValue;
-      if(state === 6 ){
-      fetch(serverUrl + "/queue/saveTemperature?batchid=" + queueList[0].id + "&temperature=" + specificValue);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
-    });
-
-}, 1000);
-
+  APIFetcher(apiEndpoint)
+      .then((temperatureValue) => {
+        document.getElementById("temperature").textContent = temperatureValue;
+        if(state === 6 ){
+          //Only measures temperature when it is running on the machine and not simulation
+          if(temperatureValue === 0){}
+          else {
+            fetch(serverUrl + "/queue/saveTemperature?batchid=" + queueList[0].id + "&temperature=" + temperatureValue);
+          }
+        }
+      });
+}
 
 function getCurrentBatchId() {
   return fetch(serverUrl + "/fetch/batchIDValue");
 }
 
 // Humidity Sensor
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+function updateHumidityValue() {
   const apiEndpoint = serverUrl + "/fetch/humidityValue";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("humidity").textContent = specificValue;
-      if(state === 6 ){
-      fetch(serverUrl + "/queue/saveHumidity?batchid=" + queueList[0].id + "&humidity=" + specificValue);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
+  APIFetcher(apiEndpoint)
+      .then((humidityValue) => {
+        document.getElementById("humidity").textContent = humidityValue;
+        if (state === 6) {
+          if(humidityValue === 0){}
+          //Only measures humidity when it is running on the machine and not simulation
+          else {
+            fetch(serverUrl + "/queue/saveHumidity?batchid=" + queueList[0].id + "&humidity=" + humidityValue);
+          }
+        }
+      });
+}
 
 // Vibration Sensor
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-  const apiEndpoint = serverUrl + "/fetch/vibrationValue";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+  function updateVibrationValue() {
+    const apiEndpoint = serverUrl + "/fetch/vibrationValue";
+    APIFetcher(apiEndpoint).then((vibrationValue) => {
+      document.getElementById("vibration").textContent = vibrationValue;
+      if (state === 6) {
+        //Only measures vibration when it is running on the machine and not simulation
+        if(vibrationValue === 0){}
+        else {
+          fetch(serverUrl + "/queue/saveVibration?batchid=" + queueList[0].id + "&vibration=" + vibrationValue);
+        }
       }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("vibration").textContent = specificValue;
-      if(state === 6 ){
-      fetch(serverUrl + "/queue/saveVibration?batchid=" + queueList[0].id + "&vibration=" + specificValue);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
     });
-}, 1000);
+}
 
 // Batch ID
-
-setInterval(function () {
+function updateBatchId() {
   document.getElementById("batchID").textContent = queueList[0].id;
-}, 1000);
+}
 
 // Products/min
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+function updateProductsMin() {
   const apiEndpoint = serverUrl + "/fetch/MachSpeedValue";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("prod/min").textContent = specificValue;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById("result").innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
+  APIFetcher(apiEndpoint)
+      .then((productsMinValue) => {
+        document.getElementById("prod/min").textContent = productsMinValue;
+      });
+}
 
 // Acceptable Products
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
-  const apiEndpoint = serverUrl + "/fetch/acceptableProductsValue";
-
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      successfulBeers = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
+  function updateAcceptableProducts() {
+    const apiEndpoint = serverUrl + "/fetch/acceptableProductsValue";
+    APIFetcher(apiEndpoint).then((successfulBeers) => {
       document.getElementById("acceptableProducts").textContent = successfulBeers;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById(
-        "acceptableProducts"
-      ).innerHTML = `Error: ${error.message}`;
     });
-}, 1000);
+}
 
 // Defect Products
-
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+function updateDefectProducts() {
   const apiEndpoint = serverUrl + "/fetch/defectProductsValue";
+  APIFetcher(apiEndpoint)
+      .then((defectProductsValue) => {
+        document.getElementById("defectProducts").textContent = defectProductsValue;
+      });
 
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      failedBeers = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("defectProducts").textContent = failedBeers;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById(
-        "defectProducts"
-      ).innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
+};
 
 // Total Produced
 
-setInterval(function () {
+function updateTotalProducts() {
   const apiEndpoint = serverUrl + "/fetch/totalProducts";
-
-  // Function to make API call and return the parsed JSON
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      getTotalProduced = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      // console.log('Specific Value Total Products:', specificValue);
-      // Display the API response on the HTML page
-      document.getElementById("totalProducts").textContent = getTotalProduced;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById(
-        "totalProducts"
-      ).innerHTML = `Error: ${error.message}`;
-    });
-  //code goes here that will be run every 5 seconds.
-}, 1000);
+  APIFetcher(apiEndpoint).then((totalProduced) => {
+    getTotalProduced = totalProduced;
+    document.getElementById("totalProducts").textContent = totalProduced;
+  });
+}
 
 //Remaining products
-setInterval(function () {
+
+function updateRemainingProducts() {
   let getQueueBeerID = queueList[0].id;
-  const apiEndpoint =
-    serverUrl + "/fetch/getRemainingProducts?batchId=" + getQueueBeerID;
-
-  // Function to make API call and return the parsed JSON
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      const specificValue = data; // Replace 'propertyName' with the actual property name in your JSON
-      console.log("Specific value " + specificValue);
-      document.getElementById("remainingProducts").textContent = specificValue;
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      document.getElementById(
-        "remainingProducts"
-      ).innerHTML = `Error: ${error.message}`;
-    });
-  //code goes here that will be run every 5 seconds.
-}, 1000);
+  const apiEndpoint = serverUrl + "/fetch/getRemainingProducts?batchId=" + getQueueBeerID;
+  APIFetcherNoneVariant(apiEndpoint).then((remainingProductsValue) => {
+  document.getElementById("remainingProducts").textContent = remainingProductsValue;
+  });
+}
 
 // Current State
 
-setInterval(function () {
-  // Replace 'YOUR_API_ENDPOINT' with the actual API endpoint you want to call
+function updateCurrentState() {
   const apiEndpoint = serverUrl + "/fetch/currentStateValue";
+  APIFetcher(apiEndpoint)
+      .then((currentStateValue) => {
+        const elementToColor = document.getElementById("stateColor");
+        const stateText = document.getElementById("stateText");
+        state = currentStateValue;
+        document.getElementById("stateNumber").textContent = currentStateValue;
 
-  // Make the API call using fetch
-  fetch(apiEndpoint)
-    .then((response) => {
-      // Check if the request was successful (status code 200)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      // Parse the JSON in the response
-      return response.json();
-    })
-    .then((data) => {
-      // Access and print the values from the JSON response
-      // console.log('API Response:', data);
-
-      // Example: Access a specific value from the JSON
-      const specificValue = data.value; // Replace 'propertyName' with the actual property name in your JSON
-      const elementToColor = document.getElementById("stateColor");
-      const stateText = document.getElementById("stateText");
-      state = specificValue;
-      // console.log('Specific Value:', specificValue);
-
-      // Display the API response on the HTML page
-      document.getElementById("stateNumber").textContent = specificValue;
-
-      //Change what state is shown in the UI
-      switch (specificValue) {
-        case 0:
-          elementToColor.style.backgroundColor = "red";
-          stateText.textContent = "Deactivated";
-          break;
-        case 1:
-          elementToColor.style.backgroundColor = "blue";
-          stateText.textContent = "Clearing";
-          break;
-        case 2:
-          elementToColor.style.backgroundColor = "red";
-          stateText.textContent = "Stopped";
-          break;
-        case 3:
-          elementToColor.style.backgroundColor = "green";
-          stateText.textContent = "Starting";
-          break;
-        case 4:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Idle";
-          break;
-        case 5:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Suspended";
-          break;
-        case 6:
-          elementToColor.style.backgroundColor = "green";
-          stateText.textContent = "Execute";
-          break;
-        case 7:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Stopping";
-          break;
-        case 8:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Aborting";
-          break;
-        case 9:
-          elementToColor.style.backgroundColor = "red";
-          stateText.textContent = "Aborted";
-          break;
-        case 10:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Holding";
-          break;
-        case 11:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Held";
-          break;
-        case 15:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Resetting";
-          break;
-        case 16:
-          elementToColor.style.backgroundColor = "green";
-          stateText.textContent = "Completing";
-          break;
-        case 17:
-          elementToColor.style.backgroundColor = "green";
-          stateText.textContent = "Complete";
-          break;
-        case 18:
-          elementToColor.style.backgroundColor = "yellow";
-          stateText.textContent = "Deactivating";
-          break;
-        case 19:
-          elementToColor.style.backgroundColor = "green";
-          stateText.textContent = "Activating";
-          break;
-        default:
-          // Default color
-          elementToColor.style.backgroundColor = "blue";
-          stateText.textContent = "*Default*";
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      // Display the error on the HTML page
-      document.getElementById(
-        "stateNumber"
-      ).innerHTML = `Error: ${error.message}`;
-    });
-}, 1000);
-
-//Calculate remaining bar for each beer in queue
-
-
+        switch (currentStateValue) {
+          case 0:
+            elementToColor.style.backgroundColor = "red";
+            stateText.textContent = "Deactivated";
+            break;
+          case 1:
+            elementToColor.style.backgroundColor = "blue";
+            stateText.textContent = "Clearing";
+            break;
+          case 2:
+            elementToColor.style.backgroundColor = "red";
+            stateText.textContent = "Stopped";
+            break;
+          case 3:
+            elementToColor.style.backgroundColor = "green";
+            stateText.textContent = "Starting";
+            break;
+          case 4:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Idle";
+            break;
+          case 5:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Suspended";
+            break;
+          case 6:
+            elementToColor.style.backgroundColor = "green";
+            stateText.textContent = "Execute";
+            break;
+          case 7:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Stopping";
+            break;
+          case 8:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Aborting";
+            break;
+          case 9:
+            elementToColor.style.backgroundColor = "red";
+            stateText.textContent = "Aborted";
+            break;
+          case 10:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Holding";
+            break;
+          case 11:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Held";
+            break;
+          case 15:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Resetting";
+            break;
+          case 16:
+            elementToColor.style.backgroundColor = "green";
+            stateText.textContent = "Completing";
+            break;
+          case 17:
+            elementToColor.style.backgroundColor = "green";
+            stateText.textContent = "Complete";
+            break;
+          case 18:
+            elementToColor.style.backgroundColor = "yellow";
+            stateText.textContent = "Deactivating";
+            break;
+          case 19:
+            elementToColor.style.backgroundColor = "green";
+            stateText.textContent = "Activating";
+            break;
+          default:
+            // Default color
+            elementToColor.style.backgroundColor = "blue";
+            stateText.textContent = "*Default*";
+        }
+      });
+}
