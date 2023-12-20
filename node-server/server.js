@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt"); //bcrypt is the password hasher
 const path = require("path");
 const cors = require("cors"); //cors is api safety module, protocol for it allows us to access domains outside the nodejs domain, i.e the spring server is the same we use when we use @CrossOrigin on spring
 const pool = require('./db'); // connect to db
+//const pool = require("./db-container"); // connect to container-db
 
 
 const app = express();
